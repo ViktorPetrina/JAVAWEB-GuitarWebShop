@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public class GuitarRepositoryImpl implements GuitarRepository {
 
-    private static List<GuitarItem> mockItems;
+    private static final List<GuitarItem> mockItems;
 
     static {
         mockItems = new ArrayList<>(List.of(
