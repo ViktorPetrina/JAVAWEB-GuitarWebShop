@@ -3,10 +3,13 @@ package hr.vpetrina.webshop.service;
 import hr.vpetrina.webshop.dto.GuitarItemDto;
 import hr.vpetrina.webshop.model.GuitarItem;
 import hr.vpetrina.webshop.repository.GuitarRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Service
 public class GuitarServiceImpl implements GuitarService {
 
     private final GuitarRepository repo;
@@ -22,27 +25,50 @@ public class GuitarServiceImpl implements GuitarService {
 
     @Override
     public Optional<GuitarItemDto> getById(Integer id) {
-        return Optional.empty();
+        Optional<GuitarItem> guitarItemOptional =
+                repo.getById(id);
+
+        if (guitarItemOptional.isPresent()) {
+            GuitarItem guitarItem = guitarItemOptional.get();
+            return Optional.of(toDto(guitarItem));
+        }
+        else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public GuitarItemDto insert(GuitarItemDto item) {
-        return null;
+        GuitarItem guitarItem =
+                repo.insert(toEntity(item));
+        return toDto(guitarItem);
     }
 
     @Override
     public Optional<GuitarItemDto> update(Integer id, GuitarItemDto item) {
-        return Optional.empty();
+        Optional<GuitarItem> guitarItemOptional =
+                repo.update(id, toEntity(item));
+
+        if(guitarItemOptional.isPresent()) {
+            GuitarItem guitarItem = guitarItemOptional.get();
+            return Optional.of(toDto(guitarItem));
+        }
+        else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public void delete(Integer id) {
-
+        repo.delete(id);
     }
 
     @Override
     public List<GuitarItemDto> filterByName(String query) {
-        return List.of();
+        return repo.filterByName(query)
+                .stream()
+                .map(this::toDto)
+                .toList();
     }
 
     private GuitarItemDto toDto(GuitarItem item) {

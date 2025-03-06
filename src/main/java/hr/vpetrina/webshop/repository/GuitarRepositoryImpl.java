@@ -4,17 +4,21 @@ import hr.vpetrina.webshop.exception.ItemNotFoundException;
 import hr.vpetrina.webshop.model.GuitarBody;
 import hr.vpetrina.webshop.model.GuitarItem;
 import hr.vpetrina.webshop.model.GuitarNeck;
+import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class GuitarRepositoryImpl implements GuitarRepository {
 
     private static List<GuitarItem> mockItems;
 
     static {
-        mockItems = List.of(
+        mockItems = new ArrayList<>(List.of(
                 new GuitarItem(
+                        1,
                         "Fender American Professional II Stratocaster Electric Guitar",
                         "The Fender American Professional II Stratocaster brings together modern features with" +
                                 " classic Fender " +
@@ -31,6 +35,7 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         "V-Mod II Single-Coil"
                 ),
                 new GuitarItem(
+                        2,
                         "PRS SE Custom 24 Electric Guitar",
                         "The PRS SE Custom 24 offers incredible versatility and outstanding craftsmanship at" +
                                 " an affordable " +
@@ -45,6 +50,7 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         "PRS 85/15 S Humbuckers"
                 ),
                 new GuitarItem(
+                        3,
                         "Ibanez RG550 Electric Guitar",
                         "The Ibanez RG550 is a legendary instrument that's known for its aggressive, " +
                                 "high-output sound and ultra-fast " +
@@ -59,6 +65,7 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         "Quantum Humbuckers"
                 ),
                 new GuitarItem(
+                        4,
                         "Gibson Custom Eric Clapton 1958 Les Paul Custom Electric Guitar Ebony",
                         "The Gibson Eric Clapton 1958 Les Paul Custom limited-edition electric guitar is a time machine, " +
                                 "a conduit to a golden era of music and a testament to the enduring power of legendary instruments. " +
@@ -71,8 +78,7 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         new GuitarNeck("Medium C", 42.86, "Mahogany", 22),
                         "Humbuckers"
                 )
-        );
-
+        ));
     }
 
     @Override
