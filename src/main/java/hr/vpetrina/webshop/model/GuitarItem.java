@@ -13,13 +13,23 @@ public class GuitarItem {
     private GuitarBody body;
     private GuitarNeck neck;
     private String pickups;
+    private GuitarCategory category;
 
-    public GuitarItem(String title, String description, Double price, GuitarBody body, GuitarNeck neck, String pickups) {
+    public GuitarItem(
+            String title,
+            String description,
+            Double price,
+            GuitarBody body,
+            GuitarNeck neck,
+            String pickups,
+            GuitarCategory category
+    ) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.body = body;
         this.neck = neck;
         this.pickups = pickups;
+        this.category = category;
     }
 }

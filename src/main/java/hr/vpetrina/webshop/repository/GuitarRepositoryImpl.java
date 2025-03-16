@@ -2,6 +2,7 @@ package hr.vpetrina.webshop.repository;
 
 import hr.vpetrina.webshop.exception.ItemNotFoundException;
 import hr.vpetrina.webshop.model.GuitarBody;
+import hr.vpetrina.webshop.model.GuitarCategory;
 import hr.vpetrina.webshop.model.GuitarItem;
 import hr.vpetrina.webshop.model.GuitarNeck;
 import org.springframework.stereotype.Repository;
@@ -32,7 +33,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         1499.99,
                         new GuitarBody("Stratocaster", "Alder"),
                         new GuitarNeck("Slim C", 43.00, "Maple", 22),
-                        "V-Mod II Single-Coil"
+                        "V-Mod II Single-Coil",
+                        new GuitarCategory("Electric", "Electric guitar")
                 ),
                 new GuitarItem(
                         2,
@@ -47,7 +49,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         799.00,
                         new GuitarBody("Custom 24", "Mahogany with Flame Maple Veneer"),
                         new GuitarNeck("Wide Thin", 43.00, "Maple", 24),
-                        "PRS 85/15 S Humbuckers"
+                        "PRS 85/15 S Humbuckers",
+                        new GuitarCategory("Electric", "Electric guitar")
                 ),
                 new GuitarItem(
                         3,
@@ -62,7 +65,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         749.99,
                         new GuitarBody("RG", "Basswood"),
                         new GuitarNeck("Super Wizard", 43.00, "Maple", 24),
-                        "Quantum Humbuckers"
+                        "Quantum Humbuckers",
+                        new GuitarCategory("Electric", "Electric guitar")
                 ),
                 new GuitarItem(
                         4,
@@ -76,7 +80,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         19999.00,
                         new GuitarBody("Les Paul", "One-piece ultralight weight mahogany"),
                         new GuitarNeck("Medium C", 42.86, "Mahogany", 22),
-                        "Humbuckers"
+                        "Humbuckers",
+                        new GuitarCategory("Electric", "Electric guitar")
                 )
         ));
     }
