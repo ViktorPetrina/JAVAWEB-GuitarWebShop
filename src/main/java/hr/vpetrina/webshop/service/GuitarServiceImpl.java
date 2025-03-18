@@ -78,7 +78,8 @@ public class GuitarServiceImpl implements GuitarService {
                 item.getBody(),
                 item.getNeck(),
                 item.getPickups(),
-                item.getCategory()
+                item.getCategory(),
+                item.getImageUrl()
         );
     }
 
@@ -90,7 +91,8 @@ public class GuitarServiceImpl implements GuitarService {
                 dto.getBody(),
                 dto.getNeck(),
                 dto.getPickups(),
-                dto.getCategory()
+                dto.getCategory(),
+                dto.getImageUrl()
         );
     }
 }

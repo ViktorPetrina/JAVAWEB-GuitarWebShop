@@ -1,0 +1,156 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header */
+header {
+    background-color: #222;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.search-form input {
+    border: none;
+    padding: 5px;
+    outline: none;
+}
+
+.search-form button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cart-icon {
+    margin-left: 15px;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+/* Sidebar Menu */
+#category-menu {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    transition: left 0.3s ease;
+}
+
+#category-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    font-size: 18px;
+}
+
+#category-menu a:hover {
+    background: #444;
+}
+
+/* Close Button */
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    align-self: flex-end;
+    padding: 10px;
+}
+
+/* Show Sidebar when toggled */
+#category-menu.open {
+    left: 0;
+}
+
+/* Guitar List */
+.guitar-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.guitar-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    margin: 15px;
+    width: 250px;
+    text-align: center;
+}
+
+.guitar-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.guitar-card h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.guitar-card p {
+    font-size: 14px;
+    color: #555;
+}
+
+.guitar-card .price {
+    font-weight: bold;
+    color: #e60000;
+}
+
+.buy-btn {
+    background: #e60000;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.buy-btn:hover {
+    background: #b30000;
+}

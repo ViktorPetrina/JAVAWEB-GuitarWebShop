@@ -14,6 +14,7 @@ public class GuitarItem {
     private GuitarNeck neck;
     private String pickups;
     private GuitarCategory category;
+    private String imageUrl;
 
     public GuitarItem(
             String title,
@@ -22,7 +23,8 @@ public class GuitarItem {
             GuitarBody body,
             GuitarNeck neck,
             String pickups,
-            GuitarCategory category
+            GuitarCategory category,
+            String imageUrl
     ) {
         this.title = title;
         this.description = description;
@@ -31,5 +33,6 @@ public class GuitarItem {
         this.neck = neck;
         this.pickups = pickups;
         this.category = category;
+        this.imageUrl = imageUrl;
     }
 }

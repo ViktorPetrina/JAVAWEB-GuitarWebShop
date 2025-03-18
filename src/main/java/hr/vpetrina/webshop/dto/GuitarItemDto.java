@@ -16,4 +16,5 @@ public class GuitarItemDto {
     private GuitarNeck neck;
     private String pickups;
     private GuitarCategory category;
+    private String imageUrl;
 }

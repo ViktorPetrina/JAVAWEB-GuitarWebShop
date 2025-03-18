@@ -34,7 +34,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         new GuitarBody("Stratocaster", "Alder"),
                         new GuitarNeck("Slim C", 43.00, "Maple", 22),
                         "V-Mod II Single-Coil",
-                        new GuitarCategory("Electric", "Electric guitar")
+                        GuitarCategory.ELECTRIC,
+                        "https://media.guitarcenter.com/is/image/MMGS7/L78115000006000-00-600x600.jpg"
                 ),
                 new GuitarItem(
                         2,
@@ -50,7 +51,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         new GuitarBody("Custom 24", "Mahogany with Flame Maple Veneer"),
                         new GuitarNeck("Wide Thin", 43.00, "Maple", 24),
                         "PRS 85/15 S Humbuckers",
-                        new GuitarCategory("Electric", "Electric guitar")
+                        GuitarCategory.ELECTRIC,
+                        "https://media.guitarcenter.com/is/image/MMGS7/L79262000005000-00-600x600.jpg"
                 ),
                 new GuitarItem(
                         3,
@@ -66,7 +68,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         new GuitarBody("RG", "Basswood"),
                         new GuitarNeck("Super Wizard", 43.00, "Maple", 24),
                         "Quantum Humbuckers",
-                        new GuitarCategory("Electric", "Electric guitar")
+                        GuitarCategory.ELECTRIC,
+                        "https://media.guitarcenter.com/is/image/MMGS7/K59743000001000-00-600x600.jpg"
                 ),
                 new GuitarItem(
                         4,
@@ -81,7 +84,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                         new GuitarBody("Les Paul", "One-piece ultralight weight mahogany"),
                         new GuitarNeck("Medium C", 42.86, "Mahogany", 22),
                         "Humbuckers",
-                        new GuitarCategory("Electric", "Electric guitar")
+                        GuitarCategory.ELECTRIC,
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnO-IEiFOkA1hDbsrasi5sSGeEPbTWW5L-xg&s"
                 )
         ));
     }
