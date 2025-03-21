@@ -1,6 +1,7 @@
 package hr.vpetrina.webshop.service;
 
 import hr.vpetrina.webshop.dto.GuitarItemDto;
+import hr.vpetrina.webshop.model.GuitarCategory;
 import hr.vpetrina.webshop.model.GuitarItem;
 import hr.vpetrina.webshop.repository.GuitarRepository;
 import org.springframework.stereotype.Service;
@@ -65,6 +66,14 @@ public class GuitarServiceImpl implements GuitarService {
     @Override
     public List<GuitarItemDto> filterByName(String query) {
         return repo.filterByName(query)
+                .stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<GuitarItemDto> getFilteredGuitars(GuitarCategory category, String query) {
+        return repo.getFilteredGuitars(category, query)
                 .stream()
                 .map(this::toDto)
                 .toList();

@@ -154,4 +154,13 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                 .filter(item -> item.getTitle().contains(query))
                 .toList();
     }
+
+    @Override
+    public List<GuitarItem> getFilteredGuitars(GuitarCategory category, String query) {
+        return mockItems.stream()
+                .filter(item -> (query == null || query.isEmpty() || item.getTitle().toLowerCase().contains(query.toLowerCase())))
+                .filter(item -> (category == null || item.getCategory().equals(category)))
+                .toList();
+    }
+
 }

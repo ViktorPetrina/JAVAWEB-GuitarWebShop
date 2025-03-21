@@ -25,15 +25,7 @@ public class GuitarItemMvcController {
             @RequestParam(name = "search", required = false) String search,
             Model model
     ) {
-        List<GuitarItemDto> guitars = guitarService.getAll();
-
-        if (category != null) {
-            guitars = guitars.stream().filter(g -> g.getCategory() == category).toList();
-        }
-        // mozda prebaciti tu funkciju na service
-        if (search != null && !search.isEmpty()) {
-            guitars = guitars.stream().filter(g -> g.getTitle().toLowerCase().contains(search.toLowerCase())).toList();
-        }
+        List<GuitarItemDto> guitars = guitarService.getFilteredGuitars(category, search);
 
         model.addAttribute("guitars", guitars);
         model.addAttribute("selectedCategory", category);

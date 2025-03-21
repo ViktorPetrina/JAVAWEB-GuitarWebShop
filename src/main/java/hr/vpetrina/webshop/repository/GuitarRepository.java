@@ -1,5 +1,6 @@
 package hr.vpetrina.webshop.repository;
 
+import hr.vpetrina.webshop.model.GuitarCategory;
 import hr.vpetrina.webshop.model.GuitarItem;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface GuitarRepository {
     Optional<GuitarItem> update(Integer id, GuitarItem item);
     void delete(Integer id);
     List<GuitarItem> filterByName(String query);
+    List<GuitarItem> getFilteredGuitars(GuitarCategory category, String query);
 }
