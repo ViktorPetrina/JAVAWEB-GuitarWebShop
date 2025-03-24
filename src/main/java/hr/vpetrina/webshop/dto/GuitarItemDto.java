@@ -1,8 +1,6 @@
 package hr.vpetrina.webshop.dto;
 
-import hr.vpetrina.webshop.model.GuitarBody;
 import hr.vpetrina.webshop.model.GuitarCategory;
-import hr.vpetrina.webshop.model.GuitarNeck;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -12,8 +10,8 @@ public class GuitarItemDto {
     private String title;
     private String description;
     private Double price;
-    private GuitarBody body;
-    private GuitarNeck neck;
+    private String body;
+    private String neck;
     private String pickups;
     private GuitarCategory category;
     private String imageUrl;

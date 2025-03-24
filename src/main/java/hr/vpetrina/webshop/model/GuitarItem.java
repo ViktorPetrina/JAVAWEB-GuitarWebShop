@@ -10,18 +10,20 @@ public class GuitarItem {
     private String title;
     private String description;
     private Double price;
-    private GuitarBody body;
-    private GuitarNeck neck;
+    private String body;
+    private String neck;
     private String pickups;
     private GuitarCategory category;
     private String imageUrl;
+
+    public GuitarItem() {}
 
     public GuitarItem(
             String title,
             String description,
             Double price,
-            GuitarBody body,
-            GuitarNeck neck,
+            String body,
+            String neck,
             String pickups,
             GuitarCategory category,
             String imageUrl

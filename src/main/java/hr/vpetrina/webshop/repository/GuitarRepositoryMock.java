@@ -1,10 +1,8 @@
 package hr.vpetrina.webshop.repository;
 
 import hr.vpetrina.webshop.exception.ItemNotFoundException;
-import hr.vpetrina.webshop.model.GuitarBody;
 import hr.vpetrina.webshop.model.GuitarCategory;
 import hr.vpetrina.webshop.model.GuitarItem;
-import hr.vpetrina.webshop.model.GuitarNeck;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class GuitarRepositoryImpl implements GuitarRepository {
+public class GuitarRepositoryMock implements GuitarRepository {
 
     private static final List<GuitarItem> mockItems;
 
@@ -31,8 +29,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                                 " providing an " +
                                 "unmatched playing experience.",
                         1499.99,
-                        new GuitarBody("Stratocaster", "Alder"),
-                        new GuitarNeck("Slim C", 43.00, "Maple", 22),
+                        "Stratocaster, Alder",
+                        "Slim C",
                         "V-Mod II Single-Coil",
                         GuitarCategory.ELECTRIC,
                         "https://media.guitarcenter.com/is/image/MMGS7/L78115000006000-00-600x600.jpg"
@@ -48,8 +46,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                                 "wide-thin neck and " +
                                 "a beautiful flame maple veneer top, this guitar is a great addition to any player's arsenal.",
                         799.00,
-                        new GuitarBody("Custom 24", "Mahogany with Flame Maple Veneer"),
-                        new GuitarNeck("Wide Thin", 43.00, "Maple", 24),
+                        "Custom 24, Mahogany with Flame Maple Veneer",
+                        "Wide Thin",
                         "PRS 85/15 S Humbuckers",
                         GuitarCategory.ELECTRIC,
                         "https://media.guitarcenter.com/is/image/MMGS7/L79262000005000-00-600x600.jpg"
@@ -65,8 +63,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                                 "has the tone and sustain " +
                                 "you need to take your playing to the next level.",
                         749.99,
-                        new GuitarBody("RG", "Basswood"),
-                        new GuitarNeck("Super Wizard", 43.00, "Maple", 24),
+                        "RG, Basswood",
+                        "Super Wizard",
                         "Quantum Humbuckers",
                         GuitarCategory.ELECTRIC,
                         "https://media.guitarcenter.com/is/image/MMGS7/K59743000001000-00-600x600.jpg"
@@ -81,8 +79,8 @@ public class GuitarRepositoryImpl implements GuitarRepository {
                                 " aged patina to the resonant voice, whispers tales of countless stages and legendary " +
                                 "recordings, offering a rare opportunity to hold a piece of music history in your hands.",
                         19999.00,
-                        new GuitarBody("Les Paul", "One-piece ultralight weight mahogany"),
-                        new GuitarNeck("Medium C", 42.86, "Mahogany", 22),
+                        "Les Paul, One-piece ultralight weight mahogany",
+                        "Medium C",
                         "Humbuckers",
                         GuitarCategory.ELECTRIC,
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnO-IEiFOkA1hDbsrasi5sSGeEPbTWW5L-xg&s"
