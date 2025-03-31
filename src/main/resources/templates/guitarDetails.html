@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title th:text="${guitar.title}"></title>
+    <link rel="stylesheet" th:href="@{/css/guitarDetails.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
+</head>
+<body>
+
+<header th:replace="~{fragments/header}"></header>
+
+<main class="guitar-detail-container">
+    <div class="guitar-image">
+        <img th:src="${guitar.imageUrl}" alt="Guitar Image">
+    </div>
+
+    <div class="guitar-info">
+        <h1 th:text="${guitar.title}"></h1>
+        <p class="guitar-description" th:text="${guitar.description}"></p>
+
+        <h2>Specifications</h2>
+        <table class="specifications-table">
+            <tbody>
+            <tr>
+                <td class="spec-key">Body</td>
+                <td class="spec-value" th:text="${guitar.body}"></td>
+            </tr>
+            <tr>
+                <td class="spec-key">Neck</td>
+                <td class="spec-value" th:text="${guitar.neck}"></td>
+            </tr>
+            <tr>
+                <td class="spec-key">Pickups</td>
+                <td class="spec-value" th:text="${guitar.pickups}"></td>
+            </tr>
+            <tr>
+                <td class="spec-key">Category</td>
+                <td class="spec-value" th:text="${guitar.category}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="cart-section">
+            <p class="price">$<span th:text="${guitar.price}"></span></p>
+            <form th:action="@{/GuitarStore/cart/add}" method="post">
+                <input type="hidden" name="id" th:value="${guitar.id}">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
+                <button type="submit" class="buy-btn">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

@@ -81,6 +81,7 @@ public class GuitarServiceImpl implements GuitarService {
 
     private GuitarItemDto toDto(GuitarItem item) {
         return new GuitarItemDto(
+                item.getId(),
                 item.getTitle(),
                 item.getDescription(),
                 item.getPrice(),
@@ -93,15 +94,9 @@ public class GuitarServiceImpl implements GuitarService {
     }
 
     private GuitarItem toEntity(GuitarItemDto dto) {
-        return new GuitarItem(
-                dto.getTitle(),
-                dto.getDescription(),
-                dto.getPrice(),
-                dto.getBody(),
-                dto.getNeck(),
-                dto.getPickups(),
-                dto.getCategory(),
-                dto.getImageUrl()
-        );
+        GuitarItem item = new GuitarItem();
+        item.setItemData(dto.getTitle(), dto.getDescription(), dto.getPrice(), dto.getImageUrl());
+        item.setSpecifications(dto.getBody(), dto.getNeck(), dto.getPickups(), dto.getCategory());
+        return item;
     }
 }

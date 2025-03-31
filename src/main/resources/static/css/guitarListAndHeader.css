@@ -118,6 +118,20 @@ header {
     text-align: center;
 }
 
+.guitar-card h2 a {
+    color: #222; /* Dark gray or black */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    font-size: 20px;
+    display: block;
+    margin: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.guitar-card h2 a:hover {
+    color: #e60000; /* Slight highlight effect on hover */
+}
+
 .guitar-card img {
     width: 100%;
     height: auto;
@@ -136,6 +150,7 @@ header {
 
 .guitar-card .price {
     font-weight: bold;
+    font-size: 20px;
     color: #e60000;
 }
 

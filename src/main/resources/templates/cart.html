@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shopping Cart - Guitar Store</title>
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+    <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/header}"></div>
+
+<main class="cart-container">
+    <h2>Your Cart</h2>
+
+    <div class="cart-items">
+        <table class="cart-table">
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${cartItems}">
+                <td><img th:src="${item.guitar.imageUrl}" alt="Guitar Image"></td>
+                <td th:text="${item.guitar.title}"></td>
+                <td>$<span th:text="${item.guitar.price}"></span></td>
+                <td>
+                    <form th:action="@{/GuitarStore/cart/update}" method="post">
+                        <input type="hidden" name="id" th:value="${item.guitarId}">
+                        <input type="number" name="quantity" th:value="${item.quantity}" min="1" max="10">
+                        <button type="submit" class="update-btn">Update</button>
+                    </form>
+                </td>
+                <td>$<span th:text="${item.guitar.price * item.quantity}"></span></td>
+                <td>
+                    <form th:action="@{/GuitarStore/cart/remove}" method="post">
+                        <input type="hidden" name="id" th:value="${item.guitarId}">
+                        <button type="submit" class="remove-btn">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="cart-summary">
+        <h3>Cart Summary</h3>
+        <p class="total">Total Price: $<span th:text="${totalPrice}"></span></p>
+        <form th:action="@{/GuitarStore/cart/checkout}" method="get">
+            <button type="submit" class="checkout-btn">Proceed to Checkout</button>
+        </form>
+    </div>
+</main>
+
+</body>
+</html>

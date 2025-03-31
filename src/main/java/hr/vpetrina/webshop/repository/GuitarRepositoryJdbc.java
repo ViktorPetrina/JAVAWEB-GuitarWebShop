@@ -16,10 +16,13 @@ import java.util.*;
 @Repository
 public class GuitarRepositoryJdbc implements GuitarRepository {
 
-    public static final String INSERT =
+    public static final String SELECT_ALL_ITEMS = "SELECT * FROM GUITAR_ITEM";
+    public static final String SELECT_ITEM = "SELECT * FROM GUITAR_ITEM WHERE ID = ?";
+    public static final String INSERT_ITEM =
             "INSERT INTO GUITAR_ITEM(NAME, DESCRIPTION, QUANTITY, INVENTORY_CATEGORY_ID) VALUES(?, ?, ?, ?)";
-    public static final String UPDATE =
+    public static final String UPDATE_ITEM =
             "UPDATE INVENTORY_ITEM SET NAME = ?, DESCRIPTION = ?, QUANTITY = ?, INVENTORY_CATEGORY_ID = ? WHERE ID = ?";
+    public static final String DELETE_ITEM = "DELETE FROM GUITAR_ITEM WHERE ID = ?";
 
     private JdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert insertGuitarItem;
@@ -33,13 +36,13 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
 
     @Override
     public List<GuitarItem> getAll() {
-        return jdbcTemplate.query("SELECT * FROM GUITAR_ITEM", new GuitarRowMapper());
+        return jdbcTemplate.query(SELECT_ALL_ITEMS, new GuitarRowMapper());
     }
 
     @Override
     public Optional<GuitarItem> getById(Integer id) {
         GuitarItem guitarItem =  jdbcTemplate.queryForObject(
-                "SELECT * FROM GUITAR_ITEM WHERE ID = ?",
+                SELECT_ITEM,
                 new GuitarRowMapper(),
                 id
         );
@@ -58,7 +61,7 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
         parameterMap.put("NECK", item.getNeck());
         parameterMap.put("BODY", item.getBody());
 
-        jdbcTemplate.update(INSERT, parameterMap);
+        jdbcTemplate.update(INSERT_ITEM, parameterMap);
 
         Number generatedKey = insertGuitarItem.executeAndReturnKey(parameterMap);
         item.setId((Integer)generatedKey);
@@ -73,11 +76,14 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
         }
         else {
             jdbcTemplate.update( // provjeri da pasu parametri uz konstantu
-                    UPDATE,
+                    UPDATE_ITEM,
                     item.getTitle(),
                     item.getDescription(),
                     item.getPrice(),
-                    item.getInventoryCategory().getId(),
+                    item.getBody(),
+                    item.getNeck(),
+                    item.getPickups(),
+                    item.getCategory(),
                     id);
             return getById(id);
         }
@@ -85,7 +91,7 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
 
     @Override
     public void delete(Integer id) {
-
+        jdbcTemplate.update(DELETE_ITEM, id);
     }
 
     @Override
@@ -115,7 +121,7 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
     }
 
 
-    private class GuitarRowMapper implements RowMapper<GuitarItem> {
+    private static class GuitarRowMapper implements RowMapper<GuitarItem> {
 
         @Override
         public GuitarItem mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -129,6 +135,7 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
             item.setImageUrl(rs.getString("IMAGE_URL"));
             item.setBody(rs.getString("BODY"));
             item.setNeck(rs.getString("NECK"));
+            item.setPickups(rs.getString("PICKUPS"));
 
             return item;
         }

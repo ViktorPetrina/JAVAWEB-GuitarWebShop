@@ -1,9 +1,11 @@
 package hr.vpetrina.webshop.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 public class GuitarItem {
     private Integer id;
@@ -16,25 +18,19 @@ public class GuitarItem {
     private GuitarCategory category;
     private String imageUrl;
 
-    public GuitarItem() {}
+    public GuitarItem() { /* empty because of builder pattern */ }
 
-    public GuitarItem(
-            String title,
-            String description,
-            Double price,
-            String body,
-            String neck,
-            String pickups,
-            GuitarCategory category,
-            String imageUrl
-    ) {
+    public void setItemData(String title, String description, Double price, String imageUrl) {
         this.title = title;
         this.description = description;
         this.price = price;
+        this.imageUrl = imageUrl;
+    }
+
+    public void setSpecifications(String body, String neck, String pickups, GuitarCategory category) {
         this.body = body;
         this.neck = neck;
         this.pickups = pickups;
         this.category = category;
-        this.imageUrl = imageUrl;
     }
 }

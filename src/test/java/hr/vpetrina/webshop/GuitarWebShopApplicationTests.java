@@ -8,6 +8,7 @@ class GuitarWebShopApplicationTests {
 
     @Test
     void contextLoads() {
+        throw new UnsupportedOperationException();
     }
 
 }

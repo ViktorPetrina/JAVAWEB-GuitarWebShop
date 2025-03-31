@@ -7,15 +7,17 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("mvc/guitars")
-public class GuitarItemMvcController {
+@RequestMapping("GuitarStore/guitars")
+public class GuitarItemController {
 
     private final GuitarService guitarService;
 
@@ -30,6 +32,20 @@ public class GuitarItemMvcController {
         model.addAttribute("guitars", guitars);
         model.addAttribute("selectedCategory", category);
         model.addAttribute("searchQuery", search);
-        return "listGuitars";
+
+        return "guitarList";
+    }
+
+    @GetMapping("/details/{id}")
+    public String guitarDetails(@PathVariable String id, Model model) {
+        Optional<GuitarItemDto> guitar = guitarService.getById(Integer.parseInt(id));
+
+        if(guitar.isEmpty()) {
+            return "redirect:/GuitarStore/guitars/list";
+        }
+
+        model.addAttribute("guitar", guitar.get());
+
+        return "guitarDetails";
     }
 }

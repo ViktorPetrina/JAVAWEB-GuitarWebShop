@@ -1,0 +1,44 @@
+<header th:fragment="header">
+    <div class="header-left">
+        <button class="menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a th:href="@{/GuitarStore/guitars/list}" class="home-icon">
+            <i class="fas fa-home"></i>
+        </a>
+    </div>
+    <h1>Guitar Store</h1>
+    <div class="header-right">
+        <form method="get" action="#" th:action="@{/GuitarStore/guitars/list}" class="search-form">
+            <input type="text" name="search" placeholder="Search guitars..." th:value="${searchQuery}">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <a th:href="@{/GuitarStore/cart/show}" class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+    </div>
+</header>
+
+<nav id="category-menu">
+    <button class="close-btn" onclick="toggleMenu()">
+        <i class="fas fa-times"></i>
+    </button>
+    <a th:href="@{/GuitarStore/guitars/list(category='ELECTRIC')}">Electric Guitars</a>
+    <a th:href="@{/GuitarStore/guitars/list(category='ACOUSTIC')}">Acoustic Guitars</a>
+    <a th:href="@{/GuitarStore/guitars/list(category='CLASSICAL')}">Classical Guitars</a>
+</nav>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('category-menu').classList.toggle('open');
+    }
+</script>
+
+<style>
+    .home-icon {
+        margin-left: 10px;
+        font-size: 1.5rem;
+        color: inherit;
+        text-decoration: none;
+    }
+</style>

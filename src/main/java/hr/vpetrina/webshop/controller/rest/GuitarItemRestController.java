@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/guitars")
-public class GuitarItemController {
+@RequestMapping("rest/guitars")
+public class GuitarItemRestController {
 
     private final GuitarService service;
 
-    public GuitarItemController(GuitarService service) {
+    public GuitarItemRestController(GuitarService service) {
         this.service = service;
     }
 
