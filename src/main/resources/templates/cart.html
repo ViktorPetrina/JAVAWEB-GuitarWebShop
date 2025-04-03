@@ -52,7 +52,7 @@
     <div class="cart-summary">
         <h3>Cart Summary</h3>
         <p class="total">Total Price: $<span th:text="${totalPrice}"></span></p>
-        <form th:action="@{/GuitarStore/cart/checkout}" method="get">
+        <form th:action="@{/GuitarStore/checkout}" method="get">
             <button type="submit" class="checkout-btn">Proceed to Checkout</button>
         </form>
     </div>
