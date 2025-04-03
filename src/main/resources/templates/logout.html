@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+  <meta charset="UTF-8">
+  <title>Logout</title>
+  <link rel="stylesheet" th:href="@{/css/logout.css}">
+  <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
+</head>
+<body>
+<div class="logout-container">
+  <h2>Are you sure you want to log out?</h2>
+
+  <form th:action="@{/GuitarStore/logout}" method="post">
+    <button type="submit" class="logout-btn">Yes, Logout</button>
+  </form>
+
+  <a th:href="@{/GuitarStore/guitars/list}" class="cancel-btn">Cancel</a>
+</div>
+</body>
+</html>

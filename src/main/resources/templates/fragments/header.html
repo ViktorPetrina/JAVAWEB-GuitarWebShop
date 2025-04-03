@@ -16,6 +16,18 @@
         <a th:href="@{/GuitarStore/cart/show}" class="cart-icon">
             <i class="fas fa-shopping-cart"></i>
         </a>
+
+        <th:block th:if="${session.user != null}">
+            <a th:href="@{/GuitarStore/logout}" class="logout-icon">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </th:block>
+
+        <th:block th:unless="${session.user != null}">
+            <a th:href="@{/GuitarStore/login}" class="login-icon">
+                <i class="fas fa-user"></i> Login
+            </a>
+        </th:block>
     </div>
 </header>
 
@@ -40,5 +52,23 @@
         font-size: 1.5rem;
         color: inherit;
         text-decoration: none;
+    }
+
+    .login-icon, .logout-icon {
+        margin-left: 15px;
+        font-size: 1.2rem;
+        color: inherit;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+
+    .login-icon i, .logout-icon i {
+        margin-right: 5px;
+    }
+
+    .username {
+        margin-right: 15px;
+        font-size: 1.2rem;
     }
 </style>

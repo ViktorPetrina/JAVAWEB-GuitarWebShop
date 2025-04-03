@@ -19,13 +19,13 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
     public static final String SELECT_ALL_ITEMS = "SELECT * FROM GUITAR_ITEM";
     public static final String SELECT_ITEM = "SELECT * FROM GUITAR_ITEM WHERE ID = ?";
     public static final String INSERT_ITEM =
-            "INSERT INTO GUITAR_ITEM(NAME, DESCRIPTION, QUANTITY, INVENTORY_CATEGORY_ID) VALUES(?, ?, ?, ?)";
+            "INSERT INTO GUITAR_ITEM(NAME, DESCRIPTION, PRICE, IMAGE, CATEGORY, PICKUPS, NECK, BODY) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_ITEM =
-            "UPDATE INVENTORY_ITEM SET NAME = ?, DESCRIPTION = ?, QUANTITY = ?, INVENTORY_CATEGORY_ID = ? WHERE ID = ?";
+            "UPDATE INVENTORY_ITEM SET NAME = ?, DESCRIPTION = ?, PRICE = ?, IMAGE = ?, CATEGORY = ?, PICKUPS = ?, NECK = ?, BODY = ? WHERE ID = ?";
     public static final String DELETE_ITEM = "DELETE FROM GUITAR_ITEM WHERE ID = ?";
 
-    private JdbcTemplate jdbcTemplate;
-    private SimpleJdbcInsert insertGuitarItem;
+    private final JdbcTemplate jdbcTemplate;
+    private final SimpleJdbcInsert insertGuitarItem;
 
     public GuitarRepositoryJdbc(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
