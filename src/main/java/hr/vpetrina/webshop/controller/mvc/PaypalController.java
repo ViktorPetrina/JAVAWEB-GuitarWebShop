@@ -2,6 +2,7 @@ package hr.vpetrina.webshop.controller.mvc;
 
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
+import com.paypal.api.payments.ShippingAddress;
 import com.paypal.base.rest.PayPalRESTException;
 import hr.vpetrina.webshop.service.PaypalService;
 import lombok.RequiredArgsConstructor;
@@ -9,25 +10,27 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping("GuitarStore/paypal")
 public class PaypalController {
 
-    public static final String CANCEL_URL = "http://localhost:8080/payment/cancel";
-    public static final String SUCCESS_URL = "http://localhost:8080/payment/success";
+    public static final String CANCEL_URL = "http://localhost:8080/GuitarStore/payment/cancel";
+    public static final String SUCCESS_URL = "http://localhost:8080/GuitarStore/payment/success";
 
     private final PaypalService paypalService;
 
-    @GetMapping("/")
+    @GetMapping
     public String home() {
         return "paypal";
     }
 
-    @PostMapping("/payment/create")
+    @GetMapping("/payment/create")
     public RedirectView createPayment(
             @RequestParam("method") String method,
             @RequestParam("amount") String amount,
@@ -38,11 +41,10 @@ public class PaypalController {
             Payment payment = paypalService.createPayment(
                     Double.valueOf(amount),
                     currency,
-                    method,
                     "sale",
-                    description,
                     CANCEL_URL,
-                    SUCCESS_URL
+                    SUCCESS_URL,
+                    new ShippingAddress()
             );
 
             for (Links links : payment.getLinks()) {
