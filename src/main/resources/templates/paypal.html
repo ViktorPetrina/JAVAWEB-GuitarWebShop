@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>PayPal</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-DQvkBjpPgn7RC31MCQoOeC9TI2kdqa4+BSgNMNj8v77fdC77Kj5zpWFTJaaAoMbC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-YUe2LzesAfftltw+PEaao2tjU/QATaW/rOitAq67e0CT0Zi2VVRL0oC4+gAaeBKu" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center mt-5">Paypal payment integration</h1>
+  <form method="post" action="/payment/create" class="mt-5 card p-3">
+    <div class="mb-3">
+      <label for="method" class="form-label">Payment method</label>
+      <input id="method" name="method" type="text" class="form-control" value="PayPal" readonly>
+    </div>
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount</label>
+      <input id="amount" name="amount" type="number" class="form-control" value="10.0">
+    </div>
+    <div class="mb-3">
+      <label for="currency" class="form-label">Currency</label>
+      <select id="currency" name="currency" class="form-control">
+        <option value="USD" selected>USD</option>
+        <option value="EUR">EUR</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input id="description" name="description" type="text" class="form-control">
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary">Pay with paypal</button>
+    </div>
+  </form>
+</div>
+</body>
+
+</html>
