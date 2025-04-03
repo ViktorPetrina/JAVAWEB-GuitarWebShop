@@ -15,7 +15,7 @@ import java.util.Optional;
 public class CartServiceImpl implements CartService {
 
     private static final String CART_SESSION_KEY = "cartItems";
-    
+
     private final GuitarService guitarService;
 
     @Override

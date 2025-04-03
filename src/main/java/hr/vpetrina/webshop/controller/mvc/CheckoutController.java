@@ -24,7 +24,10 @@ public class CheckoutController {
     }
 
     @PostMapping
-    public String checkout(Model model) {
+    public String checkout() {
+
+
+
         return "checkout";
     }
 }
