@@ -61,8 +61,6 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
         parameterMap.put("NECK", item.getNeck());
         parameterMap.put("BODY", item.getBody());
 
-        jdbcTemplate.update(INSERT_ITEM, parameterMap);
-
         Number generatedKey = insertGuitarItem.executeAndReturnKey(parameterMap);
         item.setId((Integer)generatedKey);
 
@@ -75,7 +73,7 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
             return Optional.empty();
         }
         else {
-            jdbcTemplate.update( // provjeri da pasu parametri uz konstantu
+            jdbcTemplate.update(
                     UPDATE_ITEM,
                     item.getTitle(),
                     item.getDescription(),

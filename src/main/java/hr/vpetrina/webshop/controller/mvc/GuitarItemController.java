@@ -2,7 +2,6 @@ package hr.vpetrina.webshop.controller.mvc;
 
 import hr.vpetrina.webshop.dto.GuitarItemDto;
 import hr.vpetrina.webshop.model.GuitarCategory;
-import hr.vpetrina.webshop.repository.CategoryRepository;
 import hr.vpetrina.webshop.service.CategoryService;
 import hr.vpetrina.webshop.service.GuitarService;
 import lombok.AllArgsConstructor;
@@ -21,7 +20,7 @@ public class GuitarItemController {
     private final GuitarService guitarService;
     private final CategoryService categoryService;
 
-    @GetMapping("/list")
+    @GetMapping("/mainPage")
     public String listGuitars(
             @RequestParam(name = "categoryId", required = false) Integer categoryId,
             @RequestParam(name = "search", required = false) String search,
@@ -35,9 +34,14 @@ public class GuitarItemController {
         model.addAttribute("selectedCategory", categoryId);
         model.addAttribute("searchQuery", search);
 
-        return "guitarList";
+        return "guitarListMainPage";
     }
 
+    @GetMapping("/list")
+    public String listGuitars(Model model) {
+        model.addAttribute("guitars", guitarService.getAll());
+        return "guitarList";
+    }
 
     @GetMapping("/details/{id}")
     public String guitarDetails(@PathVariable String id, Model model) {
@@ -55,11 +59,32 @@ public class GuitarItemController {
     @GetMapping("/add")
     public String addGuitar(Model model) {
         model.addAttribute("guitar", new GuitarItemDto());
+        model.addAttribute("categories", categoryService.getAll());
         return "addGuitar";
     }
 
-    /*@PostMapping("/add")
+    @PostMapping("/add")
     public String addGuitar(@ModelAttribute GuitarItemDto guitarItemDto) {
+        guitarService.insert(guitarItemDto);
+        return "redirect:/GuitarStore/guitars/list";
+    }
 
-    }*/
+    @GetMapping("/edit/{id}")
+    public String editGuitar(@PathVariable Integer id, Model model) {
+        model.addAttribute("guitar", guitarService.getById(id));
+        model.addAttribute("categories", categoryService.getAll());
+        return "editGuitar";
+    }
+
+    @PostMapping("/update")
+    public String updateGuitar(@ModelAttribute GuitarItemDto guitar) {
+        guitarService.update(guitar.getId(), guitar);
+        return "guitarList";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteGuitar(@PathVariable Integer id) {
+        guitarService.delete(id);
+        return "guitarList";
+    }
 }

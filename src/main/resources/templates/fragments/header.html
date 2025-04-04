@@ -3,13 +3,13 @@
         <button class="menu-btn" onclick="toggleMenu()">
             <i class="fas fa-bars"></i>
         </button>
-        <a th:href="@{/GuitarStore/guitars/list}" class="home-icon">
+        <a th:href="@{/GuitarStore/guitars/mainPage}" class="home-icon">
             <i class="fas fa-home"></i>
         </a>
     </div>
     <h1>Guitar Store</h1>
     <div class="header-right">
-        <form method="get" action="#" th:action="@{/GuitarStore/guitars/list}" class="search-form">
+        <form method="get" action="#" th:action="@{/GuitarStore/guitars/mainPage}" class="search-form">
             <input type="text" name="search" placeholder="Search guitars..." th:value="${searchQuery}">
             <button type="submit"><i class="fas fa-search"></i></button>
         </form>
@@ -17,6 +17,9 @@
             <i class="fas fa-shopping-cart"></i>
         </a>
 
+        <a th:href="@{/GuitarStore/guitars/list}" class="admin-icon" title="Admin Tools">
+            <i class="fas fa-tools"></i>
+        </a>
         <th:block th:if="${session.user != null}">
 
             <th:block th:if="${session.user.role.name() == 'ADMIN'}">

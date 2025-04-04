@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Guitar Store</title>
+    <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="~{fragments/header}"></header>
+
+<main class="guitar-list">
+    <div class="guitar-card" th:each="guitar : ${guitars}">
+        <img th:src="${guitar.imageUrl}" alt="Guitar Image">
+        <h2><a th:href="@{/GuitarStore/guitars/details/{id}(id=${guitar.id})}" th:text="${guitar.title}"></a></h2>
+        <p th:text="${guitar.description}"></p>
+        <p class="price">$<span th:text="${guitar.price}"></span></p>
+    </div>
+</main>
+
+</body>
+</html>

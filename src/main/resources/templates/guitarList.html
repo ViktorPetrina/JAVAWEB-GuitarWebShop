@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Guitar Store</title>
-    <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Guitar List</title>
+    <link rel="stylesheet" th:href="@{/css/guitarList.css}">
 </head>
 <body>
 
-<header th:replace="~{fragments/header}"></header>
+<a th:href="@{/GuitarStore/guitars/add}">➕ Add Guitar</a>
 
-<main class="guitar-list">
-    <div class="guitar-card" th:each="guitar : ${guitars}">
-        <img th:src="${guitar.imageUrl}" alt="Guitar Image">
-        <h2><a th:href="@{/GuitarStore/guitars/details/{id}(id=${guitar.id})}" th:text="${guitar.title}"></a></h2>
-        <p th:text="${guitar.description}"></p>
-        <p class="price">$<span th:text="${guitar.price}"></span></p>
-    </div>
-</main>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="guitar : ${guitars}">
+        <td th:text="${guitar.title}"></td>
+        <td th:text="${guitar.price}"></td>
+        <td th:text="${guitar.category.name}"></td>
+        <td>
+            <a th:href="@{/GuitarStore/guitars/edit/{id}(id=${guitar.id})}">Edit</a>
+            <a th:href="@{/GuitarStore/guitars/delete/{id}(id=${guitar.id})}" onclick="return confirm('Are you sure?');">Delete</a>
+            <a th:href="@{/GuitarStore/guitars/details/{id}(id=${guitar.id})}">View</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
