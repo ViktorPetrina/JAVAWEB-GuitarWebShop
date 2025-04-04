@@ -16,6 +16,13 @@ header {
     position: relative;
 }
 
+.admin-icon {
+    margin-left: 15px;
+    font-size: 1.3rem;
+    color: inherit;
+    text-decoration: none;
+}
+
 .header-left, .header-right {
     display: flex;
     align-items: center;

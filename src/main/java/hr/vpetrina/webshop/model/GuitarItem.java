@@ -15,7 +15,7 @@ public class GuitarItem {
     private String body;
     private String neck;
     private String pickups;
-    private GuitarCategory category;
+    private Integer categoryId;
     private String imageUrl;
 
     public GuitarItem() { /* empty because of builder pattern */ }
@@ -27,10 +27,10 @@ public class GuitarItem {
         this.imageUrl = imageUrl;
     }
 
-    public void setSpecifications(String body, String neck, String pickups, GuitarCategory category) {
+    public void setSpecifications(String body, String neck, String pickups, Integer categoryId) {
         this.body = body;
         this.neck = neck;
         this.pickups = pickups;
-        this.category = category;
+        this.categoryId = categoryId;
     }
 }

@@ -3,6 +3,7 @@ package hr.vpetrina.webshop.service;
 import hr.vpetrina.webshop.dto.GuitarItemDto;
 import hr.vpetrina.webshop.model.GuitarCategory;
 import hr.vpetrina.webshop.model.GuitarItem;
+import hr.vpetrina.webshop.repository.CategoryRepository;
 import hr.vpetrina.webshop.repository.GuitarRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class GuitarServiceImpl implements GuitarService {
 
     private final GuitarRepository repo;
+    private final CategoryRepository categoryRepo;
 
-    public GuitarServiceImpl(GuitarRepository repo) {
+    public GuitarServiceImpl(GuitarRepository repo, CategoryRepository categoryRepo) {
         this.repo = repo;
+        this.categoryRepo = categoryRepo;
     }
 
     @Override
@@ -72,7 +75,7 @@ public class GuitarServiceImpl implements GuitarService {
     }
 
     @Override
-    public List<GuitarItemDto> getFilteredGuitars(GuitarCategory category, String query) {
+    public List<GuitarItemDto> getFilteredGuitars(Integer category, String query) {
         return repo.getFilteredGuitars(category, query)
                 .stream()
                 .map(this::toDto)
@@ -80,6 +83,12 @@ public class GuitarServiceImpl implements GuitarService {
     }
 
     private GuitarItemDto toDto(GuitarItem item) {
+        var category = categoryRepo.getById(item.getCategoryId());
+
+        if (!category.isPresent()) {
+            return null;
+        }
+
         return new GuitarItemDto(
                 item.getId(),
                 item.getTitle(),
@@ -88,7 +97,7 @@ public class GuitarServiceImpl implements GuitarService {
                 item.getBody(),
                 item.getNeck(),
                 item.getPickups(),
-                item.getCategory(),
+                category.get(),
                 item.getImageUrl()
         );
     }
@@ -96,7 +105,7 @@ public class GuitarServiceImpl implements GuitarService {
     private GuitarItem toEntity(GuitarItemDto dto) {
         GuitarItem item = new GuitarItem();
         item.setItemData(dto.getTitle(), dto.getDescription(), dto.getPrice(), dto.getImageUrl());
-        item.setSpecifications(dto.getBody(), dto.getNeck(), dto.getPickups(), dto.getCategory());
+        item.setSpecifications(dto.getBody(), dto.getNeck(), dto.getPickups(), dto.getCategory().getId());
         return item;
     }
 }

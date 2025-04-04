@@ -18,8 +18,6 @@ public class UserPurchaseRepositoryImpl implements UserPurchaseRepository {
 
     public static final String SELECT_PURCHASE = "SELECT * FROM USER_PURCHASE WHERE ID = ?";
     public static final String SELECT_PURCHASE_BY_USER = "SELECT * FROM USER_PURCHASE WHERE USER_ID = ?";
-    private static final String INSERT_PURCHASE =
-            "INSERT INTO USER_PURCHASE(DATE, PAYMENT, QUANTITY, TOTAL_PRICE, GUITAR_ID) VALUES(?, ?, ?, ?, ?)";
 
     private final JdbcTemplate jdbcTemplate;
     private final SimpleJdbcInsert insertUserPurchase;

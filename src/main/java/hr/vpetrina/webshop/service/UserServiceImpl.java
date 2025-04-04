@@ -3,6 +3,7 @@ package hr.vpetrina.webshop.service;
 import hr.vpetrina.webshop.dto.GuitarItemDto;
 import hr.vpetrina.webshop.dto.UserPurchaseDto;
 import hr.vpetrina.webshop.model.*;
+import hr.vpetrina.webshop.repository.CategoryRepository;
 import hr.vpetrina.webshop.repository.GuitarRepository;
 import hr.vpetrina.webshop.repository.UserPurchaseRepository;
 import hr.vpetrina.webshop.repository.UserRepository;
@@ -15,25 +16,26 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final GuitarRepository guitarRepository;
+    private final CategoryRepository categoryRepository;
     private final UserPurchaseRepository purchaseRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
     public UserServiceImpl(
-            GuitarRepository guitarRepository,
+            GuitarRepository guitarRepository, CategoryRepository categoryRepository,
             UserRepository userRepository,
             UserPurchaseRepository purchaseRepository,
             PasswordEncoder passwordEncoder,
             JwtService jwtService
     ) {
         this.guitarRepository = guitarRepository;
+        this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
         this.purchaseRepository = purchaseRepository;
         this.passwordEncoder = passwordEncoder;
@@ -41,12 +43,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(String username, String password, String email) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setEmail(email);
-        user.setRole(UserRole.REGULAR);
+    public void registerUser(User user) {
+        user.setUsername(user.getUsername());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEmail(user.getEmail());
+        user.setRole(user.getRole());
 
         userRepository.insert(user);
     }
@@ -102,7 +103,7 @@ public class UserServiceImpl implements UserService {
         return purchaseRepository.getByUserId(userId)
                 .stream()
                 .map(this::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -118,6 +119,11 @@ public class UserServiceImpl implements UserService {
         if (guitarOpt.isPresent() && user.isPresent()) {
 
             var guitar = guitarOpt.get();
+            Optional<GuitarCategory> category = categoryRepository.getById(guitar.getCategoryId());
+
+            if (!category.isPresent()) {
+                return null;
+            }
 
             return new UserPurchaseDto(
                     purchase.getQuantity(),
@@ -132,7 +138,7 @@ public class UserServiceImpl implements UserService {
                             guitar.getBody(),
                             guitar.getNeck(),
                             guitar.getPickups(),
-                            guitar.getCategory(),
+                            category.get(),
                             guitar.getImageUrl()
                     ),
                     user.get()

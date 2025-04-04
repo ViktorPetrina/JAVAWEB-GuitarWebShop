@@ -25,7 +25,7 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, Model model) {
-        userService.registerUser(user.getUsername(), user.getPassword(), user.getEmail());
+        userService.registerUser(user);
         model.addAttribute("user", user);
         return "redirect:/GuitarStore/login";
     }

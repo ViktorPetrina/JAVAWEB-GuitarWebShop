@@ -18,4 +18,6 @@ public class GuitarItemDto implements Serializable {
     private String pickups;
     private GuitarCategory category;
     private String imageUrl;
+
+    public GuitarItemDto() { /* empty because of controller usage */ }
 }

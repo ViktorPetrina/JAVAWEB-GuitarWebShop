@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    void registerUser(String username, String password, String email);
+    void registerUser(User user);
     Optional<User> loginUser(String username, String password, HttpServletResponse response);
     void logoutUser(HttpServletResponse response);
     Boolean isLoggedIn(HttpServletRequest request, HttpSession session);

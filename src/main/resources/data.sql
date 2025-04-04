@@ -1,4 +1,6 @@
-INSERT INTO GUITAR_ITEM (TITLE, DESCRIPTION, PRICE, BODY, NECK, PICKUPS, CATEGORY, IMAGE_URL)
+INSERT INTO GUITAR_CATEGORY(NAME) VALUES('ELECTRIC'), ('ACOUSTIC'), ('CLASSICAL');
+
+INSERT INTO GUITAR_ITEM (TITLE, DESCRIPTION, PRICE, BODY, NECK, PICKUPS, CATEGORY_ID, IMAGE_URL)
 VALUES ('Fender American Professional II Stratocaster Electric Guitar',
         'The Fender American Professional II Stratocaster brings together modern features with classic Fender style.
         This exceptional instrument is designed to meet the needs of discerning players, whether you''re rocking on stage
@@ -8,7 +10,7 @@ VALUES ('Fender American Professional II Stratocaster Electric Guitar',
         'Stratocaster, Alder',
         'Slim C',
         'V-Mod II Single-Coil',
-        'ELECTRIC',
+        1,
         'https://media.guitarcenter.com/is/image/MMGS7/L78115000006000-00-600x600.jpg'),
        ('PRS SE Custom 24 Electric Guitar',
         'The PRS SE Custom 24 offers incredible versatility and outstanding craftsmanship at an affordable price.
@@ -19,7 +21,7 @@ VALUES ('Fender American Professional II Stratocaster Electric Guitar',
         'Custom 24, Mahogany with Flame Maple Veneer',
         'Wide Thin',
         'PRS 85/15 S Humbuckers',
-        'ELECTRIC',
+        1,
         'https://media.guitarcenter.com/is/image/MMGS7/L79262000005000-00-600x600.jpg'),
        ('Ibanez RG550 Electric Guitar',
         'The Ibanez RG550 is a legendary instrument that''s known for its aggressive, high-output sound and ultra-fast
@@ -30,7 +32,7 @@ VALUES ('Fender American Professional II Stratocaster Electric Guitar',
         'RG, Basswood',
         'Super Wizard',
         'Quantum Humbuckers',
-        'ELECTRIC',
+        1,
         'https://media.guitarcenter.com/is/image/MMGS7/K59743000001000-00-600x600.jpg'),
        ('Gibson Custom Eric Clapton 1958 Les Paul Custom Electric Guitar Ebony',
         'The Gibson Eric Clapton 1958 Les Paul Custom limited-edition electric guitar is a time machine, a conduit to a
@@ -42,7 +44,7 @@ VALUES ('Fender American Professional II Stratocaster Electric Guitar',
         'Les Paul, One-piece ultralight weight mahogany',
         'Medium C',
         'Humbuckers',
-        'ELECTRIC',
+        1,
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnO-IEiFOkA1hDbsrasi5sSGeEPbTWW5L-xg&s'),
        ('Yamaha F335 Acoustic Guitar Black',
         'The Yamaha F335 acoustic guitar is a stellar blend of quality, playability, and affordability, ' ||
@@ -55,7 +57,7 @@ VALUES ('Fender American Professional II Stratocaster Electric Guitar',
         'Acoustic regular',
         'Medium C',
         'No pickups',
-        'ACOUSTIC',
+        2,
         'https://media.guitarcenter.com/is/image/MMGS7/512940000001000-00-2000x2000.jpg'),
        ('Yamaha FG Series FGX800C Acoustic-Electric Guitar Sand Burst',
         'Yamaha''s FGX800C acoustic-electric guitar gives players an instrument with the quality and ' ||
@@ -67,7 +69,7 @@ VALUES ('Fender American Professional II Stratocaster Electric Guitar',
         'Dreadnought',
         'Not specified',
         'Yamaha SYSTEM 66',
-        'ACOUSTIC',
+        2,
         'https://media.guitarcenter.com/is/image/MMGS7/J31555000003000-00-600x600.jpg'),
        ('Gibson L-00 Special Acoustic-Electric Guitar Vintage Sunburst',
         'The Gibson L-00 Special acoustic-electric guitar is more than just an instrument; it''s a ' ||
@@ -80,7 +82,7 @@ VALUES ('Fender American Professional II Stratocaster Electric Guitar',
         'L-00, Satin nitrocellulose lacquer',
         'SlimTaper',
         'L.R. Baggs Element Bronze',
-        'ACOUSTIC',
+        2,
         'https://media.guitarcenter.com/is/image/MMGS7/M18331000001000-00-2000x2000.jpg'),
        ('Cordoba C7 CD Classical Acoustic Guitar Natural',
         'The C7 CD Classical acoustic guitar is a wonderful choice for beginner or intermediate guitarists.' ||
@@ -92,7 +94,7 @@ VALUES ('Fender American Professional II Stratocaster Electric Guitar',
         'Classical',
         'C shape',
         'No pickups',
-        'CLASSICAL',
+        3,
         'https://media.guitarcenter.com/is/image/MMGS7/L48608000001000-00-600x600.jpg');
 
 

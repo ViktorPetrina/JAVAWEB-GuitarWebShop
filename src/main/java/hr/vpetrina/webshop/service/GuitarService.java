@@ -13,5 +13,5 @@ public interface GuitarService {
     Optional<GuitarItemDto> update(Integer id, GuitarItemDto item);
     void delete(Integer id);
     List<GuitarItemDto> filterByName(String query);
-    List<GuitarItemDto> getFilteredGuitars(GuitarCategory category, String query);
+    List<GuitarItemDto> getFilteredGuitars(Integer category, String query);
 }

@@ -2,14 +2,13 @@ package hr.vpetrina.webshop.controller.mvc;
 
 import hr.vpetrina.webshop.dto.GuitarItemDto;
 import hr.vpetrina.webshop.model.GuitarCategory;
+import hr.vpetrina.webshop.repository.CategoryRepository;
+import hr.vpetrina.webshop.service.CategoryService;
 import hr.vpetrina.webshop.service.GuitarService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,21 +19,25 @@ import java.util.Optional;
 public class GuitarItemController {
 
     private final GuitarService guitarService;
+    private final CategoryService categoryService;
 
     @GetMapping("/list")
     public String listGuitars(
-            @RequestParam(name = "category", required = false) GuitarCategory category,
+            @RequestParam(name = "categoryId", required = false) Integer categoryId,
             @RequestParam(name = "search", required = false) String search,
             Model model
     ) {
-        List<GuitarItemDto> guitars = guitarService.getFilteredGuitars(category, search);
+        List<GuitarItemDto> guitars = guitarService.getFilteredGuitars(categoryId, search);
+        List<GuitarCategory> categories = categoryService.getAll();
 
         model.addAttribute("guitars", guitars);
-        model.addAttribute("selectedCategory", category);
+        model.addAttribute("categories", categories);
+        model.addAttribute("selectedCategory", categoryId);
         model.addAttribute("searchQuery", search);
 
         return "guitarList";
     }
+
 
     @GetMapping("/details/{id}")
     public String guitarDetails(@PathVariable String id, Model model) {
@@ -48,4 +51,15 @@ public class GuitarItemController {
 
         return "guitarDetails";
     }
+
+    @GetMapping("/add")
+    public String addGuitar(Model model) {
+        model.addAttribute("guitar", new GuitarItemDto());
+        return "addGuitar";
+    }
+
+    /*@PostMapping("/add")
+    public String addGuitar(@ModelAttribute GuitarItemDto guitarItemDto) {
+
+    }*/
 }

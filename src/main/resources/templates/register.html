@@ -22,9 +22,16 @@
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" th:field="*{email}" required/>
 
+        <label for="role">Role:</label>
+        <select id="role" name="role" th:field="*{role}" required>
+            <option value="REGULAR">Regular</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+
         <button type="submit">Register</button>
     </form>
     <p>Already have an account? <a th:href="@{/GuitarStore/login}">Login</a></p>
 </div>
+
 </body>
 </html>

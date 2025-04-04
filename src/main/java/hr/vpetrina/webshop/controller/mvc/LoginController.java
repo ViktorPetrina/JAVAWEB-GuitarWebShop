@@ -4,7 +4,6 @@ import hr.vpetrina.webshop.model.LoginRequest;
 import hr.vpetrina.webshop.model.User;
 import hr.vpetrina.webshop.service.JwtService;
 import hr.vpetrina.webshop.service.UserService;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;

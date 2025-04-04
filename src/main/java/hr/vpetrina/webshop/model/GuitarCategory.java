@@ -1,5 +1,17 @@
 package hr.vpetrina.webshop.model;
 
-public enum GuitarCategory {
-    ELECTRIC, ACOUSTIC, CLASSICAL
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@AllArgsConstructor
+@Getter
+@Setter
+public class GuitarCategory {
+    private Integer id;
+    private String name;
+
+    public GuitarCategory() {
+        
+    }
 }

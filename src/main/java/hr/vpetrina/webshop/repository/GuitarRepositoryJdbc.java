@@ -56,7 +56,7 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
         parameterMap.put("DESCRIPTION", item.getDescription());
         parameterMap.put("PRICE", item.getPrice());
         parameterMap.put("IMAGE", item.getImageUrl());
-        parameterMap.put("CATEGORY", item.getCategory());
+        parameterMap.put("CATEGORY_ID", item.getCategoryId());
         parameterMap.put("PICKUPS", item.getPickups());
         parameterMap.put("NECK", item.getNeck());
         parameterMap.put("BODY", item.getBody());
@@ -83,7 +83,7 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
                     item.getBody(),
                     item.getNeck(),
                     item.getPickups(),
-                    item.getCategory(),
+                    item.getCategoryId(),
                     id);
             return getById(id);
         }
@@ -100,14 +100,14 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
     }
 
     @Override
-    public List<GuitarItem> getFilteredGuitars(GuitarCategory category, String query) {
+    public List<GuitarItem> getFilteredGuitars(Integer category, String query) {
         StringBuilder sql = new StringBuilder("SELECT * FROM GUITAR_ITEM WHERE 1=1");
 
         List<Object> params = new ArrayList<>();
 
         if (category != null) {
-            sql.append(" AND CATEGORY = ?");
-            params.add(category.name());
+            sql.append(" AND CATEGORY_ID = ?");
+            params.add(category);
         }
 
         if (query != null && !query.isEmpty()) {
@@ -131,7 +131,7 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
             item.setTitle(rs.getString("TITLE"));
             item.setDescription(rs.getString("DESCRIPTION"));
             item.setPrice(rs.getDouble("PRICE"));
-            item.setCategory(GuitarCategory.valueOf(rs.getString("CATEGORY")));
+            item.setCategoryId(rs.getInt("CATEGORY_ID"));
             item.setImageUrl(rs.getString("IMAGE_URL"));
             item.setBody(rs.getString("BODY"));
             item.setNeck(rs.getString("NECK"));
