@@ -1,7 +1,6 @@
 package hr.vpetrina.webshop.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,7 +19,7 @@ public class User implements UserDetails {
     private String email;
     private UserRole role;
 
-    public User() {}
+    public User() {/* empty because of row mapper and register user method */}
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

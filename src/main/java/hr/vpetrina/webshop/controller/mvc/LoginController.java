@@ -38,18 +38,13 @@ public class LoginController {
             HttpSession session,
             HttpServletResponse response
     ) {
-        Optional<User> userOpt = userService.loginUser(loginRequest.getUsername(), loginRequest.getPassword());
+        Optional<User> userOpt = userService.loginUser(
+                loginRequest.getUsername(),
+                loginRequest.getPassword(),
+                response
+        );
 
         if (userOpt.isPresent()) {
-            String jwt = jwtService.generateToken(userOpt.get());
-
-            Cookie cookie = new Cookie("jwt", jwt);
-            cookie.setHttpOnly(true);
-            cookie.setPath("/");
-            cookie.setMaxAge(jwtService.getExpirationTime());
-
-            response.addCookie(cookie);
-
             session.setAttribute("user", userOpt.get());
             return "redirect:/GuitarStore/guitars/list";
         }
@@ -65,12 +60,8 @@ public class LoginController {
 
     @PostMapping("/logout")
     public String logoutUser(HttpSession session, HttpServletResponse response) {
+        userService.logoutUser(response);
         session.removeAttribute("user");
-        Cookie cookie = new Cookie("jwt", null);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
         return "redirect:/GuitarStore/guitars/list";
     }
 }

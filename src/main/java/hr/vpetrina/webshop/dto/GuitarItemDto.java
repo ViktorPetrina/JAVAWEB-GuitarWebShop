@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 public class GuitarItemDto implements Serializable {
-    private long id;
+    private Integer id;
     private String title;
     private String description;
     private Double price;

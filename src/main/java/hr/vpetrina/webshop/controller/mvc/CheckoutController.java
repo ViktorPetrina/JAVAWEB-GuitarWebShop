@@ -6,6 +6,8 @@ import com.paypal.api.payments.ShippingAddress;
 import com.paypal.base.rest.PayPalRESTException;
 import hr.vpetrina.webshop.service.CartService;
 import hr.vpetrina.webshop.service.PaypalService;
+import hr.vpetrina.webshop.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Slf4j
@@ -29,16 +32,42 @@ public class CheckoutController {
 
     private final CartService cartService;
     private final PaypalService paypalService;
+    private final UserService userService;
 
     @GetMapping
-    public String showCheckout(HttpSession session, Model model) {
+    public String showCheckout(
+            HttpSession session,
+            Model model,
+            RedirectAttributes redirectAttributes,
+            HttpServletRequest request
+    ) {
         var items = cartService.getCartItems(session);
+
+        if (!userService.isLoggedIn(request, session)) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Must be logged in to checkout");
+            return "redirect:/GuitarStore/cart/show";
+        }
+
+        if (items.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "The cart is empty");
+            return "redirect:/GuitarStore/cart/show";
+        }
+
         model.addAttribute("totalPrice", cartService.calculateTotal(items));
         return CHECKOUT;
     }
 
     @PostMapping
-    public RedirectView checkout(HttpSession session, Model model, @RequestParam("paymentMethod") String paymentMethod) {
+    public RedirectView checkout(
+            HttpSession session,
+            Model model,
+            @RequestParam("paymentMethod") String paymentMethod,
+            @RequestParam("line1") String line1,
+            @RequestParam("city") String city,
+            @RequestParam("state") String state,
+            @RequestParam("postalCode") String postalCode,
+            @RequestParam("countryCode") String countryCode
+    ) {
         var items = cartService.getCartItems(session);
         var totalPrice = cartService.calculateTotal(items);
 
@@ -47,16 +76,15 @@ public class CheckoutController {
         if ("paypal".equals(paymentMethod)) {
 
             var address = new ShippingAddress();
-            address.setLine1("123 Main Street"); // First line of address (required)
-            address.setLine2("Apt 4B"); // Second line of address (optional)
-            address.setCity("New York"); // City (required)
-            address.setState("NY"); // State (required)
-            address.setPostalCode("10001"); // Postal Code (required)
-            address.setCountryCode("US"); // Country Code (required)
+            address.setLine1(line1);
+            address.setCity(city);
+            address.setState(state);
+            address.setPostalCode(postalCode);
+            address.setCountryCode(countryCode);
 
             try {
                 Payment payment = paypalService.createPayment(
-                        100.0,
+                        totalPrice,
                         "USD",
                         "sale",
                         CANCEL_URL,
