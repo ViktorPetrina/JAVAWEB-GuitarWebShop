@@ -1,7 +1,7 @@
 package hr.vpetrina.webshop.service;
 
 import hr.vpetrina.webshop.model.User;
-import hr.vpetrina.webshop.model.UserPurchaseDto;
+import hr.vpetrina.webshop.dto.UserPurchaseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

@@ -1,6 +1,7 @@
-package hr.vpetrina.webshop.model;
+package hr.vpetrina.webshop.dto;
 
-import hr.vpetrina.webshop.dto.GuitarItemDto;
+import hr.vpetrina.webshop.model.PaymentType;
+import hr.vpetrina.webshop.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

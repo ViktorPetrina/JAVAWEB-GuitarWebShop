@@ -44,6 +44,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void removeAllCartItems(HttpSession session) {
+        session.setAttribute(CART_SESSION_KEY, new ArrayList<CartItem>());
+    }
+
+    @Override
     public Double calculateTotal(List<CartItem> items) {
         return items.stream()
                 .mapToDouble(item -> item.getPrice() * item.getQuantity())

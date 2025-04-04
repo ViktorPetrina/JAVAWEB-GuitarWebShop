@@ -4,7 +4,9 @@ import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.ShippingAddress;
 import com.paypal.base.rest.PayPalRESTException;
+import hr.vpetrina.webshop.model.PaymentType;
 import hr.vpetrina.webshop.service.CartService;
+import hr.vpetrina.webshop.service.PaymentService;
 import hr.vpetrina.webshop.service.PaypalService;
 import hr.vpetrina.webshop.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +35,7 @@ public class CheckoutController {
     private final CartService cartService;
     private final PaypalService paypalService;
     private final UserService userService;
+    private final PaymentService paymentService;
 
     @GetMapping
     public String showCheckout(
@@ -43,7 +46,7 @@ public class CheckoutController {
     ) {
         var items = cartService.getCartItems(session);
 
-        if (!userService.isLoggedIn(request, session)) {
+        if (Boolean.FALSE.equals(userService.isLoggedIn(request, session))) {
             redirectAttributes.addFlashAttribute("errorMessage", "Must be logged in to checkout");
             return "redirect:/GuitarStore/cart/show";
         }
@@ -55,6 +58,11 @@ public class CheckoutController {
 
         model.addAttribute("totalPrice", cartService.calculateTotal(items));
         return CHECKOUT;
+    }
+
+    @GetMapping("/success")
+    public String showCheckoutSuccess() {
+        return "checkout-success";
     }
 
     @PostMapping
@@ -101,14 +109,11 @@ public class CheckoutController {
             } catch (PayPalRESTException e) {
                 log.error(e.getMessage());
             }
-
-        } else if ("payment-on-delivery".equals(paymentMethod)) {
-            model.addAttribute("message", "Order confirmed! You'll pay upon delivery.");
-        } else {
-            model.addAttribute("error", "Invalid payment method selected.");
-            return new RedirectView(CHECKOUT);
         }
 
-        return new RedirectView("checkout-success");
+        // ako je pay-on-delivery
+        model.addAttribute("message", "Order confirmed! You'll pay upon delivery.");
+        paymentService.savePaymentHistory(session, PaymentType.ON_DELIVERY);
+        return new RedirectView("/GuitarStore/checkout/success");
     }
 }

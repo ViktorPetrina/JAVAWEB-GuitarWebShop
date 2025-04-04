@@ -18,6 +18,9 @@
         </a>
 
         <th:block th:if="${session.user != null}">
+            <a th:href="@{/GuitarStore/history/show}" class="history-icon" title="Purchase History">
+                <i class="fas fa-receipt"></i>
+            </a>
             <a th:href="@{/GuitarStore/logout}" class="logout-icon">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </a>
@@ -67,8 +70,10 @@
         margin-right: 5px;
     }
 
-    .username {
-        margin-right: 15px;
-        font-size: 1.2rem;
+    .history-icon {
+        margin-left: 15px;
+        font-size: 1.3rem;
+        color: inherit;
+        text-decoration: none;
     }
 </style>

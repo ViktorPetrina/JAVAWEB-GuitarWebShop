@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase History</title>
+    <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
+    <link rel="stylesheet" th:href="@{/css/purchaseHistory.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="~{fragments/header}"></header>
+
+<h2>Purchase History</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Guitar</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th>Date</th>
+        <th>Payment Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="purchase : ${purchases}">
+        <td th:text="${purchase.guitar.title}">Guitar Name</td>
+        <td th:text="${purchase.quantity}">1</td>
+        <td th:text="${purchase.totalPrice}">100.00</td>
+        <td th:text="${#dates.format(purchase.date, 'yyyy-MM-dd')}">2025-04-04</td>
+        <td th:text="${purchase.paymentType}">CREDIT_CARD</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

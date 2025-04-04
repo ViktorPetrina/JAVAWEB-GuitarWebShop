@@ -1,6 +1,7 @@
 package hr.vpetrina.webshop.service;
 
 import hr.vpetrina.webshop.dto.GuitarItemDto;
+import hr.vpetrina.webshop.dto.UserPurchaseDto;
 import hr.vpetrina.webshop.model.*;
 import hr.vpetrina.webshop.repository.GuitarRepository;
 import hr.vpetrina.webshop.repository.UserPurchaseRepository;
