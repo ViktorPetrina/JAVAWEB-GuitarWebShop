@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Admin Dashboard</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/css/admin.css}" />
+  <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="~{fragments/header}"></header>
+
+<main class="admin-container">
+  <h1>Admin Dashboard</h1>
+
+  <div class="admin-grid">
+    <a href="/GuitarStore/guitars/list" class="admin-card">
+      <i class="fas fa-guitar"></i>
+      <span>Manage Guitars</span>
+    </a>
+
+    <a href="/GuitarStore/categories/list" class="admin-card">
+      <i class="fas fa-layer-group"></i>
+      <span>Manage Categories</span>
+    </a>
+
+    <a href="/GuitarStore/users" class="admin-card">
+      <i class="fas fa-users-cog"></i>
+      <span>User logins</span>
+    </a>
+
+    <a href="/GuitarStore/orders" class="admin-card">
+      <i class="fas fa-shopping-cart"></i>
+      <span>View Orders</span>
+    </a>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</body>
+</html>

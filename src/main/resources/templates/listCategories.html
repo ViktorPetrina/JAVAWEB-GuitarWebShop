@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Category List</title>
+    <link rel="stylesheet" th:href="@{/css/categories.css}">
+    <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="~{fragments/header}"></header>
+
+<main class="category-container">
+    <div class="header-row">
+        <h1>Category List</h1>
+        <a class="add-btn" th:href="@{/GuitarStore/categories/add}">Add Category</a>
+    </div>
+
+    <div class="message-container">
+        <p th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
+        <p th:if="${successMessage}" class="success-message" th:text="${successMessage}"></p>
+    </div>
+
+
+    <table class="category-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category : ${categories}">
+            <td th:text="${category.name}"></td>
+            <td class="action-buttons">
+                <a class="delete-btn" th:href="@{/GuitarStore/categories/delete/{id}(id=${category.id})}"
+                   onclick="return confirm('Are you sure?');">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

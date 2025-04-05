@@ -1,0 +1,105 @@
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.category-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header-row h1 {
+    font-size: 26px;
+    color: #222;
+}
+
+.add-btn {
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.add-btn:hover {
+    background: #0056b3;
+}
+
+.message-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.category-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.category-table thead {
+    background: #f4f4f4;
+}
+
+.category-table th, .category-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.action-buttons a {
+    margin-right: 10px;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.edit-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #a71d2a;
+}

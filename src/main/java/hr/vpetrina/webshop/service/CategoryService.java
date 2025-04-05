@@ -10,4 +10,5 @@ public interface CategoryService {
     Optional<GuitarCategory> getById(Integer id);
     GuitarCategory insert(GuitarCategory item);
     void delete(Integer id);
+    boolean hasGuitars(Integer id);
 }

@@ -49,7 +49,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     @Override
     public GuitarCategory insert(GuitarCategory item) {
         Map<String, Object> parameterMap = new HashMap<>();
-        parameterMap.put("TITLE", item.getName());
+        parameterMap.put("NAME", item.getName());
 
         Number generatedKey = insertGuitarItem.executeAndReturnKey(parameterMap);
         item.setId((Integer)generatedKey);

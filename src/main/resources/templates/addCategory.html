@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add Category</title>
+  <link rel="stylesheet" th:href="@{/css/categoryForm.css}">
+</head>
+<body>
+
+<main class="form-container">
+  <h1>Add New Category</h1>
+
+  <form th:action="@{/GuitarStore/categories/add}" th:object="${category}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" required />
+
+    <button type="submit" class="submit-btn">Add Category</button>
+  </form>
+</main>
+
+</body>
+</html>
