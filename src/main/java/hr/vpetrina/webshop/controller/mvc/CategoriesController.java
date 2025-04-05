@@ -13,14 +13,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("GuitarStore/categories")
 public class CategoriesController {
 
+    private static final String CATEGORIES_ATTRIBUTE_KEY = "categories";
+
     private final CategoryService categoryService;
 
     @GetMapping("/list")
     public String listCategories(Model model) {
-        model.addAttribute("categories", categoryService.getAll());
+        model.addAttribute(CATEGORIES_ATTRIBUTE_KEY, categoryService.getAll());
         return "listCategories";
     }
-
 
     @GetMapping("/add")
     public String addCategory(Model model) {
@@ -31,7 +32,7 @@ public class CategoriesController {
     @PostMapping("/add")
     public String addCategory(@ModelAttribute GuitarCategory dto, Model model) {
         categoryService.insert(dto);
-        model.addAttribute("categories", categoryService.getAll());
+        model.addAttribute(CATEGORIES_ATTRIBUTE_KEY, categoryService.getAll());
         return "redirect:/GuitarStore/categories/list";
     }
 
@@ -50,7 +51,7 @@ public class CategoriesController {
             );
         }
 
-        model.addAttribute("categories", categoryService.getAll());
+        model.addAttribute(CATEGORIES_ATTRIBUTE_KEY, categoryService.getAll());
         return "redirect:/GuitarStore/categories/list";
     }
 }

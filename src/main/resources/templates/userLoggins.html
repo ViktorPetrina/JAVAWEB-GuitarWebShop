@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Logins</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/userLogins.css}" />
+    <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="~{fragments/header}"></header>
+
+<main class="logins-container">
+    <h1>User Login History</h1>
+
+    <table class="logins-table">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Login Date</th>
+            <th>IP Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="login : ${userLogins}">
+            <td th:text="${login.user.getUsername()}"></td>
+            <td th:text="${#dates.format(login.loginDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${login.ipAddress}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>
