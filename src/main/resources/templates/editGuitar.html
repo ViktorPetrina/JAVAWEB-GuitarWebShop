@@ -3,31 +3,65 @@
 <head>
     <title>Edit Guitar</title>
     <link rel="stylesheet" th:href="@{/css/guitarEdit.css}">
+    <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-<h1>Edit Guitar</h1>
-<form th:action="@{/GuitarStore/guitars/update}" th:object="${guitar}" method="post">
-    <input type="hidden" th:field="*{id}"/>
+<header th:replace="~{fragments/header}"></header>
 
-    <label>Title: <input type="text" th:field="*{title}" required/></label><br>
-    <label>Description: <textarea th:field="*{description}" required></textarea></label><br>
-    <label>Price: <input type="number" th:field="*{price}" required/></label><br>
-    <label>Body: <input type="text" th:field="*{body}" required/></label><br>
-    <label>Neck: <input type="text" th:field="*{neck}" required/></label><br>
-    <label>Pickups: <input type="text" th:field="*{pickups}" required/></label><br>
+<main class="edit-guitar-container">
+    <h1>Edit Guitar</h1>
+    <form th:action="@{/GuitarStore/guitars/update}" th:object="${guitar}" method="post" class="edit-form">
+        <input type="hidden" th:field="*{id}"/>
 
-    <label>Category:</label>
-    <select th:field="*{category.id}">
-        <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
-    </select><br>
+        <label>
+            Title:
+            <input type="text" th:field="*{title}" required />
+        </label>
 
-    <label>Image URL: <input type="text" th:field="*{imageUrl}" required/></label><br>
+        <label>
+            Description:
+            <textarea th:field="*{description}" required></textarea>
+        </label>
 
-    <button type="submit">Update</button>
-</form>
+        <label>
+            Price:
+            <input type="number" th:field="*{price}" required />
+        </label>
 
-<a href="/GuitarStore/guitars/list">🔙 Back to List</a>
+        <label>
+            Body:
+            <input type="text" th:field="*{body}" required />
+        </label>
+
+        <label>
+            Neck:
+            <input type="text" th:field="*{neck}" required />
+        </label>
+
+        <label>
+            Pickups:
+            <input type="text" th:field="*{pickups}" required />
+        </label>
+
+        <label>
+            Category:
+            <select th:field="*{category.id}">
+                <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+            </select>
+        </label>
+
+        <label>
+            Image URL:
+            <input type="text" th:field="*{imageUrl}" required />
+        </label>
+
+        <button type="submit" class="update-btn">Update</button>
+    </form>
+
+    <a class="back-link" href="/GuitarStore/guitars/list">Back to List</a>
+</main>
 
 </body>
 </html>

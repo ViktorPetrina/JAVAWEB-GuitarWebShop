@@ -49,11 +49,11 @@
         <i class="fas fa-times"></i>
     </button>
 
-    <a th:href="@{/GuitarStore/guitars/list}"
+    <a th:href="@{/GuitarStore/guitars/mainPage}"
        th:classappend="${selectedCategory == null} ? 'active'">All Guitars</a>
 
     <a th:each="cat : ${categories}"
-       th:href="@{/GuitarStore/guitars/list(categoryId=${cat.id})}"
+       th:href="@{/GuitarStore/guitars/mainPage(categoryId=${cat.id})}"
        th:text="${cat.name}"
        th:classappend="${selectedCategory == cat.id} ? 'active'">
     </a>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Guitar List</title>
+    <link rel="stylesheet" th:href="@{/css/guitarList.css}">
+    <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="~{fragments/header}"></header>
+
+<main class="guitar-list-container">
+    <div class="header-row">
+        <h1>Guitar List</h1>
+        <a class="add-guitar-btn" th:href="@{/GuitarStore/guitars/add}">Add Guitar</a>
+    </div>
+
+    <table class="guitar-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="guitar : ${guitars}">
+            <td th:text="${guitar.title}"></td>
+            <td th:text="${guitar.price}"></td>
+            <td th:text="${guitar.category.name}"></td>
+            <td class="action-buttons">
+                <a class="edit-btn" th:href="@{/GuitarStore/guitars/edit/{id}(id=${guitar.id})}">Edit</a>
+                <a class="delete-btn" th:href="@{/GuitarStore/guitars/delete/{id}(id=${guitar.id})}"
+                   onclick="return confirm('Are you sure?');">Delete</a>
+                <a class="view-btn" th:href="@{/GuitarStore/guitars/details/{id}(id=${guitar.id})}">View</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

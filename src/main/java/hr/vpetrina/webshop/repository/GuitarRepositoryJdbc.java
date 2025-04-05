@@ -21,7 +21,7 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
     public static final String INSERT_ITEM =
             "INSERT INTO GUITAR_ITEM(NAME, DESCRIPTION, PRICE, IMAGE, CATEGORY, PICKUPS, NECK, BODY) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_ITEM =
-            "UPDATE INVENTORY_ITEM SET NAME = ?, DESCRIPTION = ?, PRICE = ?, IMAGE = ?, CATEGORY = ?, PICKUPS = ?, NECK = ?, BODY = ? WHERE ID = ?";
+            "UPDATE GUITAR_ITEM SET TITLE = ?, DESCRIPTION = ?, PRICE = ?, IMAGE_URL = ?, CATEGORY_ID = ?, PICKUPS = ?, NECK = ?, BODY = ? WHERE ID = ?";
     public static final String DELETE_ITEM = "DELETE FROM GUITAR_ITEM WHERE ID = ?";
 
     private final JdbcTemplate jdbcTemplate;
@@ -55,7 +55,7 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
         parameterMap.put("TITLE", item.getTitle());
         parameterMap.put("DESCRIPTION", item.getDescription());
         parameterMap.put("PRICE", item.getPrice());
-        parameterMap.put("IMAGE", item.getImageUrl());
+        parameterMap.put("IMAGE_URL", item.getImageUrl());
         parameterMap.put("CATEGORY_ID", item.getCategoryId());
         parameterMap.put("PICKUPS", item.getPickups());
         parameterMap.put("NECK", item.getNeck());
@@ -78,10 +78,11 @@ public class GuitarRepositoryJdbc implements GuitarRepository {
                     item.getTitle(),
                     item.getDescription(),
                     item.getPrice(),
-                    item.getBody(),
+                    item.getImageUrl(),
+                    item.getCategoryId(),
                     item.getNeck(),
                     item.getPickups(),
-                    item.getCategoryId(),
+                    item.getBody(),
                     id);
             return getById(id);
         }

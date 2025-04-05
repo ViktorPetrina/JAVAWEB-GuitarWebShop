@@ -1,92 +1,94 @@
-/* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #e7e7e7;
-    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f8f8;
     margin: 0;
     padding: 0;
-    text-align: center;
 }
 
-/* Header */
-h1 {
-    color: #e60000;
-    font-size: 2.5rem;
-    margin: 20px 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* Add Guitar Button */
-a {
-    display: inline-block;
-    background-color: #e60000;
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    transition: background 0.3s ease-in-out;
-}
-
-a:hover {
-    background-color: #ff1a1a;
-}
-
-/* Table Styles */
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    background-color: #222;
+.guitar-list-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
     border-radius: 10px;
-    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-thead {
-    background-color: #e60000;
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header-row h1 {
+    font-size: 28px;
+    color: #222;
+}
+
+.add-guitar-btn {
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.add-guitar-btn:hover {
+    background: #0056b3;
+}
+
+.guitar-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 15px;
+}
+
+.guitar-table thead {
+    background: #f4f4f4;
+}
+
+.guitar-table th,
+.guitar-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.action-buttons a {
+    margin-right: 10px;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.edit-btn {
+    background-color: #007bff;
     color: white;
 }
 
-th, td {
-    padding: 15px;
-    border-bottom: 1px solid #444;
-    text-align: center;
+.edit-btn:hover {
+    background-color: #0056b3;
 }
 
-tbody tr:hover {
-    background-color: #333;
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
 }
 
-/* Action Links */
-td a {
-    margin: 0 5px;
-    padding: 8px 12px;
-    font-size: 1rem;
-    border-radius: 3px;
+.delete-btn:hover {
+    background-color: #a71d2a;
 }
 
-td a:nth-child(1) { background-color: #009900; } /* Edit (Green) */
-td a:nth-child(2) { background-color: #cc0000; } /* Delete (Red) */
-td a:nth-child(3) { background-color: #0066cc; } /* View (Blue) */
-
-td a:hover {
-    opacity: 0.8;
+.view-btn {
+    background-color: #007bff;
+    color: white;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    table {
-        width: 100%;
-    }
-
-    th, td {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-
-    a {
-        font-size: 1rem;
-        padding: 8px 12px;
-    }
+.view-btn:hover {
+    background-color: #0056b3;
 }

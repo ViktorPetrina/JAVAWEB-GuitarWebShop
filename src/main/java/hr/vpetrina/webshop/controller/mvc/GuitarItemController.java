@@ -17,11 +17,16 @@ import java.util.Optional;
 @RequestMapping("GuitarStore/guitars")
 public class GuitarItemController {
 
+    private static final String LIST_GUITARS = "listGuitars";
+    private static final String GUITAR_ATTRIBUTE_KEY = "guitar";
+    private static final String GUITARS_ATTRIBUTE_KEY = "guitars";
+    private static final String CATEGORIES_ATTRIBUTE_KEY = "categories";
+
     private final GuitarService guitarService;
     private final CategoryService categoryService;
 
     @GetMapping("/mainPage")
-    public String listGuitars(
+    public String showMainPageList(
             @RequestParam(name = "categoryId", required = false) Integer categoryId,
             @RequestParam(name = "search", required = false) String search,
             Model model
@@ -29,18 +34,18 @@ public class GuitarItemController {
         List<GuitarItemDto> guitars = guitarService.getFilteredGuitars(categoryId, search);
         List<GuitarCategory> categories = categoryService.getAll();
 
-        model.addAttribute("guitars", guitars);
-        model.addAttribute("categories", categories);
+        model.addAttribute(GUITARS_ATTRIBUTE_KEY, guitars);
+        model.addAttribute(CATEGORIES_ATTRIBUTE_KEY, categories);
         model.addAttribute("selectedCategory", categoryId);
         model.addAttribute("searchQuery", search);
 
-        return "guitarListMainPage";
+        return "mainPage";
     }
 
     @GetMapping("/list")
     public String listGuitars(Model model) {
-        model.addAttribute("guitars", guitarService.getAll());
-        return "guitarList";
+        model.addAttribute(GUITARS_ATTRIBUTE_KEY, guitarService.getAll());
+        return LIST_GUITARS;
     }
 
     @GetMapping("/details/{id}")
@@ -51,15 +56,15 @@ public class GuitarItemController {
             return "redirect:/GuitarStore/guitars/list";
         }
 
-        model.addAttribute("guitar", guitar.get());
+        model.addAttribute(GUITAR_ATTRIBUTE_KEY, guitar.get());
 
-        return "guitarDetails";
+        return "detailsGuitar";
     }
 
     @GetMapping("/add")
     public String addGuitar(Model model) {
-        model.addAttribute("guitar", new GuitarItemDto());
-        model.addAttribute("categories", categoryService.getAll());
+        model.addAttribute(GUITAR_ATTRIBUTE_KEY, new GuitarItemDto());
+        model.addAttribute(CATEGORIES_ATTRIBUTE_KEY, categoryService.getAll());
         return "addGuitar";
     }
 
@@ -71,20 +76,22 @@ public class GuitarItemController {
 
     @GetMapping("/edit/{id}")
     public String editGuitar(@PathVariable Integer id, Model model) {
-        model.addAttribute("guitar", guitarService.getById(id));
-        model.addAttribute("categories", categoryService.getAll());
+        model.addAttribute(GUITAR_ATTRIBUTE_KEY, guitarService.getById(id));
+        model.addAttribute(CATEGORIES_ATTRIBUTE_KEY, categoryService.getAll());
         return "editGuitar";
     }
 
     @PostMapping("/update")
-    public String updateGuitar(@ModelAttribute GuitarItemDto guitar) {
+    public String updateGuitar(@ModelAttribute GuitarItemDto guitar, Model model) {
         guitarService.update(guitar.getId(), guitar);
-        return "guitarList";
+        model.addAttribute(GUITARS_ATTRIBUTE_KEY, guitarService.getAll());
+        return LIST_GUITARS;
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteGuitar(@PathVariable Integer id) {
+    public String deleteGuitar(@PathVariable Integer id, Model model) {
         guitarService.delete(id);
-        return "guitarList";
+        model.addAttribute(GUITARS_ATTRIBUTE_KEY, guitarService.getAll());
+        return LIST_GUITARS;
     }
 }
