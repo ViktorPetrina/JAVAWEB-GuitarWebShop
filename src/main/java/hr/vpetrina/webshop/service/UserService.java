@@ -11,9 +11,10 @@ import java.util.Optional;
 
 public interface UserService {
     void registerUser(User user);
-    Optional<User> loginUser(String username, String password, HttpServletResponse response);
+    User loginUser(String username, String password, HttpServletResponse response);
     void logoutUser(HttpServletResponse response);
     Boolean isLoggedIn(HttpServletRequest request, HttpSession session);
     List<UserPurchaseDto> getShoppingHistory(Integer userId);
+    List<UserPurchaseDto> getAllShoppingHistory();
     void insertPurchase(UserPurchaseDto purchase);
 }

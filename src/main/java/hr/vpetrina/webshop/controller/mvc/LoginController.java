@@ -3,8 +3,6 @@ package hr.vpetrina.webshop.controller.mvc;
 import hr.vpetrina.webshop.dto.UserLoginDto;
 import hr.vpetrina.webshop.model.LoginRequest;
 import hr.vpetrina.webshop.model.User;
-import hr.vpetrina.webshop.model.UserLogin;
-import hr.vpetrina.webshop.service.JwtService;
 import hr.vpetrina.webshop.service.UserLoginService;
 import hr.vpetrina.webshop.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,16 +41,12 @@ public class LoginController {
             HttpServletResponse response,
             HttpServletRequest request
     ) {
-        Optional<User> userOpt = userService.loginUser(
-                loginRequest.getUsername(),
-                loginRequest.getPassword(),
-                response
-        );
-
-        if (userOpt.isPresent()) {
-
-            var user = userOpt.get();
-
+        try {
+            User user = userService.loginUser(
+                    loginRequest.getUsername(),
+                    loginRequest.getPassword(),
+                    response
+            );
             session.setAttribute("user", user);
             userLoginService.insert(new UserLoginDto(
                     user,
@@ -61,10 +55,10 @@ public class LoginController {
             ));
 
             return "redirect:/GuitarStore/guitars/mainPage";
+        } catch (Exception e) {
+            model.addAttribute("error", "Invalid username or password");
+            return "login";
         }
-
-        model.addAttribute("error", "Invalid username or password");
-        return "login";
     }
 
     @GetMapping("/logout")

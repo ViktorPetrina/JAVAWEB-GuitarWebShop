@@ -18,6 +18,10 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
+    private static final String ADMIN = "ADMIN";
+    private static final String REGULAR = "REGULAR";
+
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -33,6 +37,12 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/GuitarStore/guitars/mainPage").permitAll()
+                        .requestMatchers("/GuitarStore/guitars/details/{id}").permitAll()
+                        .requestMatchers("/GuitarStore/admin/**").hasRole(ADMIN)
+                        .requestMatchers("/GuitarStore/history/**").hasAnyRole(ADMIN, REGULAR)
+                        .requestMatchers("/GuitarStore/guitars/**").hasRole(ADMIN)
+                        .requestMatchers("/GuitarStore/categories/**").hasRole(ADMIN)
                         .anyRequest().permitAll())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -46,7 +56,7 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:8005"));
+        configuration.setAllowedOrigins(List.of("http://localhost:8080"));
         configuration.setAllowedMethods(List.of("GET","POST"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
 

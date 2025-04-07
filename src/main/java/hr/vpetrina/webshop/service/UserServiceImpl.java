@@ -11,6 +11,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +29,14 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
+    private final AuthenticationManager authenticationManager;
+
     public UserServiceImpl(
             GuitarRepository guitarRepository, CategoryRepository categoryRepository,
             UserRepository userRepository,
             UserPurchaseRepository purchaseRepository,
             PasswordEncoder passwordEncoder,
-            JwtService jwtService
+            JwtService jwtService, AuthenticationManager authenticationManager
     ) {
         this.guitarRepository = guitarRepository;
         this.categoryRepository = categoryRepository;
@@ -40,6 +44,7 @@ public class UserServiceImpl implements UserService {
         this.purchaseRepository = purchaseRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -52,7 +57,7 @@ public class UserServiceImpl implements UserService {
         userRepository.insert(user);
     }
 
-    @Override
+    /*@Override
     public Optional<User> loginUser(String username, String password, HttpServletResponse response) {
         var user = userRepository.findByUsername(username);
         if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
@@ -69,6 +74,29 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         return Optional.empty();
+    }*/
+
+    public User loginUser(String username, String password, HttpServletResponse response) {
+
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        username,
+                        password
+                )
+        );
+
+        var user = userRepository.findByUsername(username);
+
+        String jwt = jwtService.generateToken(user.get());
+
+        Cookie cookie = new Cookie("jwt", jwt);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(jwtService.getExpirationTime());
+
+        response.addCookie(cookie);
+
+        return user.orElseThrow();
     }
 
     @Override
@@ -101,6 +129,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserPurchaseDto> getShoppingHistory(Integer userId) {
         return purchaseRepository.getByUserId(userId)
+                .stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<UserPurchaseDto> getAllShoppingHistory() {
+        return purchaseRepository.getAll()
                 .stream()
                 .map(this::toDto)
                 .toList();

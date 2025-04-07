@@ -6,6 +6,8 @@ import hr.vpetrina.webshop.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +24,9 @@ public class PurchaseHistoryController {
 
     @GetMapping("/show")
     public String getPurchaseHistory(Model model, HttpSession session, HttpServletRequest request) {
-
-        if (Boolean.FALSE.equals(userService.isLoggedIn(request, session))) {
+        /*if (Boolean.FALSE.equals(userService.isLoggedIn(request, session))) {
             return "redirect:/login";
-        }
+        }*/
 
         User user = (User) session.getAttribute("user");
         List<UserPurchaseDto> purchases = userService.getShoppingHistory(user.getId());

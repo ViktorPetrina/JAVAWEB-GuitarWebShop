@@ -16,10 +16,6 @@
         <a th:href="@{/GuitarStore/cart/show}" class="cart-icon">
             <i class="fas fa-shopping-cart"></i>
         </a>
-
-        <a th:href="@{/GuitarStore/admin/dashboard}" class="admin-icon" title="Admin Tools">
-            <i class="fas fa-tools"></i>
-        </a>
         <th:block th:if="${session.user != null}">
 
             <th:block th:if="${session.user.role.name() == 'ADMIN'}">

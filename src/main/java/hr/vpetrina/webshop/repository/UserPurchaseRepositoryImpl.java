@@ -17,6 +17,7 @@ import java.util.Optional;
 public class UserPurchaseRepositoryImpl implements UserPurchaseRepository {
 
     public static final String SELECT_PURCHASE = "SELECT * FROM USER_PURCHASE WHERE ID = ?";
+    public static final String SELECT_ALL_PURCHASES = "SELECT * FROM USER_PURCHASE";
     public static final String SELECT_PURCHASE_BY_USER = "SELECT * FROM USER_PURCHASE WHERE USER_ID = ?";
 
     private final JdbcTemplate jdbcTemplate;
@@ -53,6 +54,11 @@ public class UserPurchaseRepositoryImpl implements UserPurchaseRepository {
                 id
         );
         return Optional.ofNullable(purchase);
+    }
+
+    @Override
+    public List<UserPurchase> getAll() {
+        return jdbcTemplate.query(SELECT_ALL_PURCHASES, new PurchaseRowMapper());
     }
 
     @Override

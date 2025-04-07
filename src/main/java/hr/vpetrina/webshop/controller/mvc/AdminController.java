@@ -1,6 +1,7 @@
 package hr.vpetrina.webshop.controller.mvc;
 
 import hr.vpetrina.webshop.service.UserLoginService;
+import hr.vpetrina.webshop.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     private final UserLoginService userLoginService;
+    private final UserService userService;
 
     @GetMapping("/dashboard")
     public String showDashboard() {
@@ -22,6 +24,12 @@ public class AdminController {
     @GetMapping("/logIns")
     public String showUserLogIns(Model model) {
         model.addAttribute("userLogins", userLoginService.getAll());
-        return "userLoggins";
+        return "listLogin";
+    }
+
+    @GetMapping("orders")
+    public String showOrders(Model model) {
+        model.addAttribute("purchases", userService.getAllShoppingHistory());
+        return "purchase-history";
     }
 }

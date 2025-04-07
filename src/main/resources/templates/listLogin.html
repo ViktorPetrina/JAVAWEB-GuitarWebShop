@@ -25,7 +25,7 @@
         <tbody>
         <tr th:each="login : ${userLogins}">
             <td th:text="${login.user.getUsername()}"></td>
-            <td th:text="${#dates.format(login.loginDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(login.loginDate, 'yyyy-MM-dd')}"></td>
             <td th:text="${login.ipAddress}"></td>
         </tr>
         </tbody>
