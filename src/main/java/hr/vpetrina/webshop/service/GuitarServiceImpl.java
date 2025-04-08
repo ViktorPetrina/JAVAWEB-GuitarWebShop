@@ -1,7 +1,6 @@
 package hr.vpetrina.webshop.service;
 
 import hr.vpetrina.webshop.dto.GuitarItemDto;
-import hr.vpetrina.webshop.model.GuitarCategory;
 import hr.vpetrina.webshop.model.GuitarItem;
 import hr.vpetrina.webshop.repository.CategoryRepository;
 import hr.vpetrina.webshop.repository.GuitarRepository;

@@ -1,7 +1,6 @@
 package hr.vpetrina.webshop.service;
 
 import hr.vpetrina.webshop.dto.UserLoginDto;
-import hr.vpetrina.webshop.model.UserLogin;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;

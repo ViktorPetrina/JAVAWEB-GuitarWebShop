@@ -11,12 +11,14 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
+    private static final String SELECT_ALL_USERS = "SELECT * FROM USERS";
     private static final String SELECT_BY_EMAIL = "SELECT * FROM USERS WHERE EMAIL = ?";
     private static final String SELECT_BY_ID = "SELECT * FROM USERS WHERE ID = ?";
     private static final String SELECT_BY_USERNAME = "SELECT * FROM USERS WHERE USERNAME = ?";
@@ -94,6 +96,11 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void delete(Integer id) {
         jdbcTemplate.update(DELETE_USER, id);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return jdbcTemplate.query(SELECT_ALL_USERS, new UserRowMapper());
     }
 
     private static class UserRowMapper implements RowMapper<User> {

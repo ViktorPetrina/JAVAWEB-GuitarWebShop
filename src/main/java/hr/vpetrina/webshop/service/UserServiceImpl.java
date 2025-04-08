@@ -16,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,11 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userRepository.getAll();
     }
 
     @Override
@@ -137,6 +143,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserPurchaseDto> getAllShoppingHistory() {
         return purchaseRepository.getAll()
+                .stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<UserPurchaseDto> getFilteredShoppingHistory(Integer userId, Date startDate, Date endDate) {
+        return purchaseRepository.getFiltered(userId, startDate, endDate)
                 .stream()
                 .map(this::toDto)
                 .toList();

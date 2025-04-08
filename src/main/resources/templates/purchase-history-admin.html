@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase History (Admin)</title>
+    <link rel="stylesheet" th:href="@{/css/guitarListAndHeader.css}">
+    <link rel="stylesheet" th:href="@{/css/purchaseHistory.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="~{fragments/header}"></header>
+
+<h2>Admin Purchase History</h2>
+
+<form th:action="@{/GuitarStore/admin/orders}" method="get" class="filter-form">
+    <label for="userId">User:</label>
+    <select id="userId" name="userId">
+        <option value="" th:selected="${userId == null}">Users</option>
+        <option th:each="user : ${users}"
+                th:value="${user.id}"
+                th:text="${user.username}"
+                th:selected="${user.id == userId}"></option>
+    </select>
+
+    <label for="startDate">From:</label>
+    <input type="date" id="startDate" name="startDate" th:value="${startDate}">
+
+    <label for="endDate">To:</label>
+    <input type="date" id="endDate" name="endDate" th:value="${endDate}">
+
+    <button type="submit"><i class="fas fa-filter"></i> Filter</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>User</th>
+        <th>Guitar</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th>Date</th>
+        <th>Payment Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="purchase : ${purchases}">
+        <td th:text="${purchase.user.username}">Username</td>
+        <td th:text="${purchase.guitar.title}">Guitar Name</td>
+        <td th:text="${purchase.quantity}">1</td>
+        <td th:text="${purchase.totalPrice}">100.00</td>
+        <td th:text="${#dates.format(purchase.date, 'yyyy-MM-dd')}">2025-04-04</td>
+        <td th:text="${purchase.paymentType}">CREDIT_CARD</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

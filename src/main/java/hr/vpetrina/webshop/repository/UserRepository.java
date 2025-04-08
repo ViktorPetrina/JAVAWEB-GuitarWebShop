@@ -2,6 +2,7 @@ package hr.vpetrina.webshop.repository;
 
 import hr.vpetrina.webshop.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository {
@@ -11,4 +12,5 @@ public interface UserRepository {
     User insert(User user);
     Optional<User> update(Integer id, User user);
     void delete(Integer id);
+    List<User> getAll();
 }

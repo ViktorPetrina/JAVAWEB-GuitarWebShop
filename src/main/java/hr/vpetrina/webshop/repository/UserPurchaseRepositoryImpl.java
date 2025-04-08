@@ -1,17 +1,16 @@
 package hr.vpetrina.webshop.repository;
 
-import hr.vpetrina.webshop.model.*;
+import hr.vpetrina.webshop.model.PaymentType;
+import hr.vpetrina.webshop.model.UserPurchase;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public class UserPurchaseRepositoryImpl implements UserPurchaseRepository {
@@ -68,6 +67,30 @@ public class UserPurchaseRepositoryImpl implements UserPurchaseRepository {
                 new UserPurchaseRepositoryImpl.PurchaseRowMapper(),
                 userId
         );
+    }
+
+    @Override
+    public List<UserPurchase> getFiltered(Integer userId, Date from, Date to) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM USER_PURCHASE WHERE 1=1");
+
+        List<Object> params = new ArrayList<>();
+
+        if (userId != null) {
+            sql.append(" AND USER_ID = ?");
+            params.add(userId);
+        }
+
+        if (from != null) {
+            sql.append(" AND DATE >= ?");
+            params.add(from);
+        }
+
+        if (to != null) {
+            sql.append(" AND DATE <= ?");
+            params.add(to);
+        }
+
+        return jdbcTemplate.query(sql.toString(), new PurchaseRowMapper(), params.toArray());
     }
 
     private static class PurchaseRowMapper implements RowMapper<UserPurchase> {
