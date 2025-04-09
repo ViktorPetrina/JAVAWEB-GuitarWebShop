@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @Getter
 @Setter
-public class GuitarCategory {
+public class GuitarCategory implements Serializable {
     private Integer id;
     private String name;
 
-    public GuitarCategory() {
-        
-    }
+    public GuitarCategory() { /* empty because of row mapper */ }
 }

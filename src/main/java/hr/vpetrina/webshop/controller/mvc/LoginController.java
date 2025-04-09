@@ -1,6 +1,5 @@
 package hr.vpetrina.webshop.controller.mvc;
 
-import hr.vpetrina.webshop.dto.UserLoginDto;
 import hr.vpetrina.webshop.model.LoginRequest;
 import hr.vpetrina.webshop.model.User;
 import hr.vpetrina.webshop.service.UserLoginService;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.sql.Date;
-import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -48,12 +44,6 @@ public class LoginController {
                     response
             );
             session.setAttribute("user", user);
-            /*userLoginService.insert(new UserLoginDto(
-                    user,
-                    new Date(System.currentTimeMillis()),
-                    userLoginService.getIpAddress(request)
-            ));*/
-
             return "redirect:/GuitarStore/guitars/mainPage";
         } catch (Exception e) {
             model.addAttribute("error", "Invalid username or password");

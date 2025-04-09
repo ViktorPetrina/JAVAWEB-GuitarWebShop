@@ -72,13 +72,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (io.jsonwebtoken.ExpiredJwtException e) {
-            //log.error("JWT expired: {}", e.getMessage());
+            log.error("JWT expired: {}", e.getMessage());
             SecurityContextHolder.clearContext();
         } catch (io.jsonwebtoken.JwtException e) {
-            //log.error("JWT error: {}", e.getMessage());
+            log.error("JWT error: {}", e.getMessage());
             SecurityContextHolder.clearContext();
         } catch (UsernameNotFoundException e) {
-           // log.error(e.getMessage());
+            log.error(e.getMessage());
         }
 
         filterChain.doFilter(request, response);

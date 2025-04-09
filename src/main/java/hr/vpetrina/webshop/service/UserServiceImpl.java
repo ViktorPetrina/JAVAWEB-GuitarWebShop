@@ -63,25 +63,6 @@ public class UserServiceImpl implements UserService {
         userRepository.insert(user);
     }
 
-    /*@Override
-    public Optional<User> loginUser(String username, String password, HttpServletResponse response) {
-        var user = userRepository.findByUsername(username);
-        if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
-
-            String jwt = jwtService.generateToken(user.get());
-
-            Cookie cookie = new Cookie("jwt", jwt);
-            cookie.setHttpOnly(true);
-            cookie.setPath("/");
-            cookie.setMaxAge(jwtService.getExpirationTime());
-
-            response.addCookie(cookie);
-
-            return user;
-        }
-        return Optional.empty();
-    }*/
-
     public User loginUser(String username, String password, HttpServletResponse response) {
 
         authenticationManager.authenticate(
@@ -93,14 +74,16 @@ public class UserServiceImpl implements UserService {
 
         var user = userRepository.findByUsername(username);
 
-        String jwt = jwtService.generateToken(user.get());
+        if (user.isPresent()) {
+            String jwt = jwtService.generateToken(user.get());
 
-        Cookie cookie = new Cookie("jwt", jwt);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(jwtService.getExpirationTime());
+            Cookie cookie = new Cookie("jwt", jwt);
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
+            cookie.setMaxAge(jwtService.getExpirationTime());
 
-        response.addCookie(cookie);
+            response.addCookie(cookie);
+        }
 
         return user.orElseThrow();
     }

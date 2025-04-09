@@ -1,7 +1,6 @@
 package hr.vpetrina.webshop.repository;
 
 import hr.vpetrina.webshop.model.GuitarCategory;
-import hr.vpetrina.webshop.model.GuitarItem;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;

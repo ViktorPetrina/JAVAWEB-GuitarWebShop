@@ -28,10 +28,10 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("GuitarStore/checkout")
 public class CheckoutController {
 
-    //public static final String CANCEL_URL = "https://guitarstore-mu6d.onrender.com/GuitarStore/paypal/payment/cancel";
-    //public static final String SUCCESS_URL = "https://guitarstore-mu6d.onrender.com/GuitarStore/paypal/payment/success";
-    public static final String CANCEL_URL = "http://localhost:8080/GuitarStore/paypal/payment/cancel";
-    public static final String SUCCESS_URL = "http://localhost:8080/GuitarStore/paypal/payment/success";
+    public static final String CANCEL_URL = "https://guitarstore-mu6d.onrender.com/GuitarStore/paypal/payment/cancel";
+    public static final String SUCCESS_URL = "https://guitarstore-mu6d.onrender.com/GuitarStore/paypal/payment/success";
+    public static final String CANCEL_URL_LOCAL = "http://localhost:8080/GuitarStore/paypal/payment/cancel";
+    public static final String SUCCESS_URL_LOCAL = "http://localhost:8080/GuitarStore/paypal/payment/success";
     private static final String CHECKOUT = "checkout";
 
     private final CartService cartService;
