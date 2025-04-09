@@ -48,11 +48,11 @@ public class LoginController {
                     response
             );
             session.setAttribute("user", user);
-            userLoginService.insert(new UserLoginDto(
+            /*userLoginService.insert(new UserLoginDto(
                     user,
                     new Date(System.currentTimeMillis()),
                     userLoginService.getIpAddress(request)
-            ));
+            ));*/
 
             return "redirect:/GuitarStore/guitars/mainPage";
         } catch (Exception e) {

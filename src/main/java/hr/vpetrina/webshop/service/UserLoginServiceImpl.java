@@ -41,7 +41,7 @@ public class UserLoginServiceImpl implements UserLoginService {
     }
 
     private UserLoginDto toDto(UserLogin userLogin) {
-        var user = userRepository.findById(userLogin.getId());
+        var user = userRepository.findById(userLogin.getUserId());
 
         if (user.isPresent()) {
             return new UserLoginDto(

@@ -3,6 +3,7 @@ package hr.vpetrina.webshop.controller.mvc;
 import hr.vpetrina.webshop.dto.UserPurchaseDto;
 import hr.vpetrina.webshop.service.UserLoginService;
 import hr.vpetrina.webshop.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class AdminController {
     private final UserService userService;
 
     @GetMapping("/dashboard")
-    public String showDashboard() {
+    public String showDashboard(HttpSession session) {
         return "admin";
     }
 
